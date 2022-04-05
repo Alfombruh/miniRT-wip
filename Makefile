@@ -7,7 +7,9 @@ RM 			= rm -rf
 
 FILES = srcs/main \
 		srcs/utils/errors \
-		srcs/utils/readrt 
+		srcs/utils/readrt \
+		srcs/utils/elements \
+		srcs/utils/elements_linked
 
 SRCS = $(addsuffix .c, $(FILES))
 OBJS = $(addsuffix .o, $(FILES))
@@ -24,18 +26,18 @@ $(NAME) : $(OBJS)
 	@mv mlx/libmlx.a .
 	@mv srcs/libft/libft.a .
 	@$(CC) $(CFLAGS) $(SFLAGS) $(MLXFLAGS) $^ libft.a libmlx.a -o  $@
-	@mv libmlx.a includes/.
-	@mv libft.a includes/.
+	@mv libmlx.a mlx/.
+	@mv libft.a srcs/libft/.
 	@printf "\e[32m\n🌈Ready to Trace some Rays🌈\e[0m\n"
 
 clean :
 	@$(MAKE) -s -C  mlx clean
 	@$(MAKE) -s -C  srcs/libft clean
-	@$(RM) $(OBJS) srcs/libft/*.o mlx/*.o *.dSYM
+	@$(RM) $(OBJS)  *.dSYM
 	@printf "\e[31m*.o=>🗑️\e[0m\n"
 
-fclean : clean
-	@$(RM) $(NAME) includes/libft.a includes/libmlx.a 
+fclean : clean 
+	@$(RM) $(NAME) srcs/libft/libft.a mlx/libmlx.a 
 	@printf "\e[31m(miniRT && libmlx.a && libft.a)=>🗑️\e[0m\n"
 
 re: fclean all

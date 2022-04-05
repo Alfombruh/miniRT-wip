@@ -58,7 +58,7 @@ SRC =   ft_isalpha.c\
         ft_lstclear.c\
         ft_lstiter.c\
         ft_lstmap.c\
-		ft_atoi_double.c\
+		ft_atod.c\
 		ft_printf_csdi.c\
 		ft_printf_u.c\
 		ft_printf_xxp.c\

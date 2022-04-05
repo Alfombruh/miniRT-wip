@@ -13,56 +13,10 @@
 # define BHGRN	"\e[1;92m"
 //color reference-> "https://www.theurbanpenguin.com/4184-2/"
 
-#include "../srcs/libft/libft.h"
-#include "../mlx/mlx.h"
+#include "mlx.h"
+#include "libft.h"
+#include "elements.h"
 #include <math.h>
-
-typedef struct s_alight
-{
-	float	ratio; // ambient ligt ratio [0,1]
-	int		RGB[3]; //RGB[0]=R RGB[1]=G RGB[2]=B
-} t_alight;
-
-typedef struct s_cam
-{
-	float	coord[3]; //[0]=x [1]=y [2]=z
-	int		n[3];  //normalized orientation vector [0]=x [1]=y [2]=z
-	int		FOV; //Field Of View, campoo de vision
-} t_cam;
-
-typedef struct s_light
-{
-	float	ratio; // ambient ligt ratio [0,1]
-	float	coord[3]; //[0]=x [1]=y [2]=z
-	float	bright; // brightness
-	// BONUS int		RGB[3]; //RGB[0]=R RGB[1]=G RGB[2]=B
-} t_light;
-
-typedef struct s_sph
-{
-	float			coord[3]; //[0]=x [1]=y [2]=z
-	float			d; //diameter
-	int				RGB[3]; //RGB[0]=R RGB[1]=G RGB[2]=B
-	struct	s_sph	*next;
-} t_sph;
-
-typedef struct s_pl
-{
-	float			coord[3]; //[0]=x [1]=y [2]=z
-	int				n[3];  //normalized orientation vector [0]=x [1]=y [2]=z
-	int				RGB[3]; //RGB[0]=R RGB[1]=G RGB[2]=B
-	struct	s_pl	*next;
-} t_pl;
-
-typedef struct s_cy
-{
-	float		coord[3]; //[0]=x [1]=y [2]=z
-	int			n[3];  //normalized orientation vector [0]=x [1]=y [2]=z
-	float		d; //diameter
-	float		h; //height
-	int			RGB[3]; //RGB[0]=R RGB[1]=G RGB[2]=B
-	struct s_cy	*next;
-} t_cy;
 
 typedef struct s_rt
 {	
@@ -81,4 +35,10 @@ int ft_error(char *s);
 
 int ft_readrt(char *argv, t_rt *rt);
 
+int element_ambient_light(char **s, t_rt *rt);
+int element_camera(char **s, t_rt *rt);
+int element_light(char **s, t_rt *rt);
+int element_sphere(char **s, t_rt *rt);
+int element_plane(char **s, t_rt *rt);
+int element_cylinder(char **s, t_rt *rt);
 #endif

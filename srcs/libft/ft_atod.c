@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 11:20:56 by eperaita          #+#    #+#             */
-/*   Updated: 2021/11/19 11:48:41 by eperaita         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:03:38 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*whole_number(double *nb, double *neg, char *str)
 	return (str);
 }
 
-double	ft_atoi_double(const char *str)
+double	ft_atod(const char *str)
 {
 	double	nb;
 	double	neg;
