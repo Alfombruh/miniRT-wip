@@ -2,25 +2,28 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-static int fill_struct(char **s, t_rt *rt)
+static int fill_struct(char **values, t_rt *rt)
 {
+	int i;
+
+	i = 0;
 	if (!s[0])
 		return (0);
-	if (ft_strncmp(s[0], "A", 1))
-		element_ambient_light(s, rt);
-	else if (ft_strncmp(s[0], "C", 1))
-		element_camera(s, rt);
-	else if (ft_strncmp(s[0], "L", 1))
-		element_light(s, rt);
-	else if (ft_strncmp(s[0], "sp", 2))
-		element_sphere(s, rt);
-	else if (ft_strncmp(s[0], "pl", 2))
-		element_plane(s, rt);
-	else if (ft_strncmp(s[0], "cy", 2))
-		element_cylinder(s, rt);
+	if (ft_strncmp(values[0], "A", 1))
+		i = element_ambient_light(values, rt);
+	else if (ft_strncmp(values[0], "C", 1))
+		i = element_camera(values, rt);
+	else if (ft_strncmp(values[0], "L", 1))
+		i = element_light(values, rt);
+	else if (ft_strncmp(values[0], "sp", 2))
+		i = element_sphere(values, rt);
+	else if (ft_strncmp(values[0], "pl", 2))
+		i = element_plane(values, rt);
+	else if (ft_strncmp(values[0], "cy", 2))
+		i =	element_cylinder(values, rt);
 	else
 		return (1);
-	return (0);
+	return (i);
 }
 
 static int get_values(char *line, t_rt *rt)
@@ -30,12 +33,12 @@ static int get_values(char *line, t_rt *rt)
 
 	(void) rt;
 	printf("line is->%s\n", line);
-	s = ft_split(line, ' ');
-	if (fill_struct(s, rt))
+	values = ft_split(line, ' ');
+	if (fill_struct(values, rt))
 		return (1);
-	while (s[++i])
-		free(s[i]);
-	free(s);
+	while (values[++i])
+		free(values[i]);
+	free(values);
 	return(0);
 }
 

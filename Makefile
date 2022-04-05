@@ -9,6 +9,7 @@ FILES = srcs/main \
 		srcs/utils/errors \
 		srcs/utils/readrt \
 		srcs/utils/elements \
+		srcs/utils/values \
 		srcs/utils/elements_linked
 
 SRCS = $(addsuffix .c, $(FILES))
