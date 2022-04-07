@@ -8,8 +8,9 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_argc());
 	if (ft_argvcheck(argv[1]))
-		return (ft_error("not .rt file"));
+		return (ft_error("not .rt file", NULL));
+	ft_memset(&rt, 0, sizeof(rt));
 	if (ft_readrt(argv[1], &rt))
-		return (ft_error(".rt file bad synstaxis"));
+		return (ft_error(".rt file bad synstaxis", &rt));
 	return (0);
 }

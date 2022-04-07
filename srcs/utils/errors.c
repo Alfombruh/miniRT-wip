@@ -25,8 +25,10 @@ int	ft_argc(void)
 	return (1);
 }
 
-int ft_error(char *s)
+int ft_error(char *s, t_rt *rt)
 {
 	printf(BHRED "Error\n%s\n" CLOSE, s);
+	if (rt)
+		free_struct(rt);
 	return (1);
 }

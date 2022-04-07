@@ -1,15 +1,16 @@
 NAME 		= miniRT
 CC			= clang
-SFLAGS		= -fsanitize=address -g3
+SFLAGS		= #-fsanitize=address -g3
 CFLAGS		= -Werror -Wextra -Wall -ggdb3
 MLXFLAGS	= -L . -lmlx -framework OpenGL -framework Appkit
 RM 			= rm -rf
 
-FILES = srcs/main \
-		srcs/utils/errors \
-		srcs/utils/readrt \
-		srcs/utils/elements \
-		srcs/utils/values \
+FILES = srcs/main	\
+		srcs/utils/frees	\
+		srcs/utils/readrt	\
+		srcs/utils/values	\
+		srcs/utils/errors	\
+		srcs/utils/elements	\
 		srcs/utils/elements_linked
 
 SRCS = $(addsuffix .c, $(FILES))
