@@ -12,5 +12,7 @@ int main(int argc, char **argv)
 	ft_memset(&rt, 0, sizeof(rt));
 	if (ft_readrt(argv[1], &rt))
 		return (ft_error(".rt file bad synstaxis", &rt));
+	if (mlx_start(&rt))
+		return (ft_error("mlx starting error", NULL));
 	return (0);
 }

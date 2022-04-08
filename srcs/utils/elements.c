@@ -18,8 +18,8 @@ int element_camera(char **v, t_rt *rt)
 	//FOV (0-180);
 	if (v[3] && !v[4])
 	{
-		get_coord(v[2], rt->cam.coord);//preguntar si devuelve 1
-		//get_vector(); //struct vs array
+		get_coord(v[1], rt->cam.coord);//preguntar si devuelve 1
+		get_vector(v[2], &rt->cam.n); //struct vs array
 		rt->cam.FOV = ft_atoi(v[3]);
 	}
 	else

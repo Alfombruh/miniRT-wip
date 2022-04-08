@@ -22,7 +22,15 @@
 #include "mlx.h"
 #include "libft.h"
 #include "elements.h"
+#include "vectors.h"
 #include <math.h>
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+}	t_mlx;
 
 typedef struct s_rt
 {	
@@ -50,7 +58,10 @@ int element_cylinder(char **s, t_rt *rt);
 
 int	get_trgb(char *color, int *tRGB);
 int get_coord(char *pos, double *coord);
+int	get_vector(char *pos, t_vec *vec);
 
 int free_double(char **str);
 int free_struct(t_rt *rt);
+
+int mlx_start(t_rt *rt);
 #endif

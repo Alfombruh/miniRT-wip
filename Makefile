@@ -11,14 +11,15 @@ FILES = srcs/main	\
 		srcs/utils/values	\
 		srcs/utils/errors	\
 		srcs/utils/elements	\
-		srcs/utils/elements_linked
+		srcs/utils/elements_linked \
+		srcs/utils/mlx_start
 
 SRCS = $(addsuffix .c, $(FILES))
 OBJS = $(addsuffix .o, $(FILES))
 
 all : $(NAME)
 
-.c.o: $(FILES)
+.c.o: $(SRCS)
 	@$(CC) $(SFLAGS) $(CFLAGS) -Imlx -c $< -o $@
 
 $(NAME) : $(OBJS) 

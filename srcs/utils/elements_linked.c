@@ -50,7 +50,7 @@ int element_plane(char **v, t_rt *rt)
 			rt->pl->next = temp;
 		}
 		get_coord(v[1], rt->pl->coord);//preguntar si devuelve 1
-		//get_vector(); //struct vs array
+		get_vector(v[2], &rt->pl->n); //struct vs array
 		if (get_trgb(v[3], &rt->pl->tRGB))
 			return (1);
 		rt->pl->next = NULL;
@@ -76,7 +76,7 @@ int element_cylinder(char **v, t_rt *rt)
 			rt->cy->next = temp;
 		}
 		get_coord(v[1], rt->cy->coord);//preguntar si devuelve 1
-		//get_vector(); //struct vs array
+		get_vector(v[2], &rt->cy->n); //struct vs array
 		rt->cy->d = ft_atod(v[3]);
 		rt->cy->h = ft_atod(v[4]);
 		if (get_trgb(v[5], &rt->cy->tRGB))

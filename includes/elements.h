@@ -1,6 +1,8 @@
 #ifndef ELEMENTS_H
 #define ELEMENTS_H
 
+#include "vectors.h"
+
 typedef struct s_alight
 {
 	double	ratio; // ambient ligt ratio [0,1]
@@ -10,7 +12,7 @@ typedef struct s_alight
 typedef struct s_cam
 {
 	double	coord[3]; //[0]=x [1]=y [2]=z
-	int		n[3]; // t_vector n; //normalized orientation vector [0]=x [1]=y [2]=z
+	t_vec	n; // t_vector n; //normalized orientation vector [0]=x [1]=y [2]=z
 	int		FOV; //Field Of View, campoo de vision [0-180]degrees
 } t_cam;
 
@@ -32,7 +34,7 @@ typedef struct s_sph
 typedef struct s_pl
 {
 	double			coord[3]; //[0]=x [1]=y [2]=z
-	int				n[3];  //normalized orientation vector [0]=x [1]=y [2]=z
+	t_vec			n;  //normalized orientation vector [0]=x [1]=y [2]=z
 	int				tRGB; //RGB[0]=R RGB[1]=G RGB[2]=B
 	struct	s_pl	*next;
 } t_pl;
@@ -40,7 +42,7 @@ typedef struct s_pl
 typedef struct s_cy
 {
 	double		coord[3]; //[0]=x [1]=y [2]=z
-	int			n[3];  //normalized orientation vector [0]=x [1]=y [2]=z
+	t_vec		n;  //normalized orientation vector [0]=x [1]=y [2]=z
 	double		d; //diameter
 	double		h; //height
 	int			tRGB; //RGB[0]=R RGB[1]=G RGB[2]=B

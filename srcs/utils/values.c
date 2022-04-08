@@ -44,11 +44,15 @@ int get_coord(char *pos, double *coord)
 }
 
 ////////////////////////VECTOR//////////////////////////
-int get_vector(char *pos, double *coord)
+int get_vector(char *pos, t_vec *vec)
 {
-	(void) pos;
-	(void) coord;
-	///solo 1     / 0
-	//considerar la opcion de meterno en una stuct s_vector, sino en un array de ints. 
+	char **temp;
+
+	temp = ft_split(pos, ',');
+	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
+		return (1);
+	vec->x = ft_atoi(temp[0]);
+	vec->y = ft_atoi(temp[1]);
+	vec->z = ft_atoi(temp[2]);
 	return (0);
 }

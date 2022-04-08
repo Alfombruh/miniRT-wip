@@ -14,6 +14,7 @@ static void print_elements(t_rt *rt)
 	{
 		printf(BHYEL "cam COORDS [x]=%f [y]=%f [z]=%f\n", rt->cam.coord[0], 
 				rt->cam.coord[1], rt->cam.coord[2]);
+		printf("CAM vector [x]=%f [y]=%f [z]=%f\n", rt->cam.n.x, rt->cam.n.y, rt->cam.n.z);
 		printf("FOV==%d\n" CLOSE, rt->cam.FOV);
 	}
 	if (rt->light.ratio)
@@ -116,5 +117,5 @@ int ft_readrt(char *argv, t_rt *rt)
 	}
 	free(s);
 	print_elements(rt);
-	return (1);
+	return (0);
 }
