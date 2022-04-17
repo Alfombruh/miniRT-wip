@@ -22,7 +22,8 @@ int element_sphere(char **v, t_rt *rt)
 			rt->sph->next = temp;
 			rt->sph = rt->sph->next;
 		}
-		get_coord(v[1], rt->sph->coord);//preguntar si devuelve 1
+		if (get_coord(v[1], rt->sph->coord))
+			return (1);
 		rt->sph->d = ft_atod(v[2]);
 		if (get_trgb(v[3], &rt->sph->tRGB))
 			return (1);
@@ -49,8 +50,10 @@ int element_plane(char **v, t_rt *rt)
 				rt->pl = rt->pl->next;
 			rt->pl->next = temp;
 		}
-		get_coord(v[1], rt->pl->coord);//preguntar si devuelve 1
-		get_vector(v[2], &rt->pl->n); //struct vs array
+		if (get_coord(v[1], rt->pl->coord))
+			return (1);
+		if (get_vector(v[2], &rt->pl->n))
+			return (1);
 		if (get_trgb(v[3], &rt->pl->tRGB))
 			return (1);
 		rt->pl->next = NULL;
@@ -75,8 +78,10 @@ int element_cylinder(char **v, t_rt *rt)
 				rt->cy = rt->cy->next;
 			rt->cy->next = temp;
 		}
-		get_coord(v[1], rt->cy->coord);//preguntar si devuelve 1
-		get_vector(v[2], &rt->cy->n); //struct vs array
+		if (get_coord(v[1], rt->cy->coord))
+			return (1);
+		if (get_vector(v[2], &rt->cy->n))
+			return (1);
 		rt->cy->d = ft_atod(v[3]);
 		rt->cy->h = ft_atod(v[4]);
 		if (get_trgb(v[5], &rt->cy->tRGB))
@@ -87,13 +92,3 @@ int element_cylinder(char **v, t_rt *rt)
 		return (1);
 	return (0);
 }
-
-////////alloc linked/////////
-	/*
-	if (!rt->cy)
-	{
-		rt->cy = (t_cy *)malloc(sizeof(t_cy));
-		rt->cy->next = NULL;
-		//function that allocates a 3 value string sepatared by commas (x3)
-	}
-	*/

@@ -6,7 +6,8 @@ int element_ambient_light(char **v, t_rt *rt)
 	if (v[2] && !v[3])
 	{
 		rt->alight.ratio = ft_atod(v[1]);
-		get_trgb(v[2], &rt->alight.tRGB);//preguntar si devuelve 1
+		if (get_trgb(v[2], &rt->alight.tRGB))
+			return (1);
 	}
 	else
 		return (1);
@@ -15,12 +16,15 @@ int element_ambient_light(char **v, t_rt *rt)
 
 int element_camera(char **v, t_rt *rt)
 {
-	//FOV (0-180);
 	if (v[3] && !v[4])
 	{
-		get_coord(v[1], rt->cam.coord);//preguntar si devuelve 1
-		get_vector(v[2], &rt->cam.n); //struct vs array
+		if (get_coord(v[1], rt->cam.coord))
+			return (1);
+		if (get_vector(v[2], &rt->cam.n))
+			return (1);
 		rt->cam.FOV = ft_atoi(v[3]);
+		if (rt->cam.FOV > 180 || rt->cam.FOV <= 0)
+			return (1);
 	}
 	else
 		return (1);

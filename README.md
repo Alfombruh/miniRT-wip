@@ -1,12 +1,11 @@
 
 /////MUST DO//////
 
--compilar
-- MLX
-- element_linked -> crear linked en element_loquesea()
--gestion de errores en values.c 
-- struct vector???
+-	make somewhat of a camera element that shoots a ray for every pixel on the screen (1920x1080)
+-	check .rt inputs that might cause a segfault (shouldn't be the case) && check .rt inputs that behave weird
+-	start branching and working in pairs
 
-/////PROXIMAMENTE////////
+/////SOON TO COME////////
 
-- .h de funciones que operan sobre vectores: rotacion, normalizacion...
+-	Cylinder, Plane, Sphere Intersection Functions
+-	Display objects without shades

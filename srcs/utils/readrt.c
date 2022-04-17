@@ -51,7 +51,7 @@ static void print_elements(t_rt *rt)
 		printf("cy COORDS [x]=%f [y]=%f [z]=%f\n", rt->cy->coord[0], 
 				rt->cy->coord[1], rt->cy->coord[2]);
 		printf("diameter==%f\n", rt->cy->d);
-		printf("diameter==%f\n", rt->cy->h);
+		printf("height==%f\n", rt->cy->h);
 		printf("tRGB==%d\n" CLOSE, rt->cy->tRGB);
 		rt->cy = rt->cy->next;
 	}

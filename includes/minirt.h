@@ -27,9 +27,10 @@
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	struct s_rt	*rt;
 }	t_mlx;
 
 typedef struct s_rt
@@ -64,4 +65,5 @@ int free_double(char **str);
 int free_struct(t_rt *rt);
 
 int mlx_start(t_rt *rt);
+
 #endif
