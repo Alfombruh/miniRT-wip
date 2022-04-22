@@ -25,16 +25,29 @@
 #include "vectors.h"
 #include <math.h>
 
+typedef struct s_img
+{
+	void		*img;
+	void		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	int 		wid;
+	int			hei;
+} 				t_img;
+
 typedef struct s_mlx
 {
 	void		*mlx;
 	void		*win;
-	void		*img;
-	struct s_rt	*rt;
+	t_img 		img;
+	struct s_rt *rt;
 }	t_mlx;
 
 typedef struct s_rt
 {	
+	int			h;
+	int			w;
 	t_alight	alight;
 	t_cam		cam;
 	t_light		light;
@@ -61,9 +74,15 @@ int	get_trgb(char *color, int *tRGB);
 int get_coord(char *pos, double *coord);
 int	get_vector(char *pos, t_vec *vec);
 
+
 int free_double(char **str);
 int free_struct(t_rt *rt);
+void free_pl(t_pl *pl);
+void free_sph(t_sph *sph);
+void free_cy(t_cy *cy);
 
 int mlx_start(t_rt *rt);
+
+int ray_trace(t_rt *rt, t_mlx *mlx, t_img *img);
 
 #endif

@@ -1,7 +1,7 @@
 #include "../../includes/minirt.h"
 #include <fcntl.h>
 #include <stdio.h>
-
+/*
 static void print_elements(t_rt *rt)
 {
 	int i = 1;
@@ -56,7 +56,7 @@ static void print_elements(t_rt *rt)
 		rt->cy = rt->cy->next;
 	}
 }
-
+*/
 static int fill_struct(char **values, t_rt *rt)
 {
 	int i;
@@ -116,6 +116,6 @@ int ft_readrt(char *argv, t_rt *rt)
 		s = get_next_line(fd);
 	}
 	free(s);
-	print_elements(rt);
+	//print_elements(rt);
 	return (0);
 }

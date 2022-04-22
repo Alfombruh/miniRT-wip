@@ -1,5 +1,4 @@
 #include "../../includes/minirt.h"
-#include <stdio.h>
 
 int element_ambient_light(char **v, t_rt *rt)
 {

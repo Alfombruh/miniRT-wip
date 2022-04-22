@@ -11,24 +11,23 @@ int free_double(char **str)
 	free(str);
 	return (1);
 }
-/*
-static void free_cy(t_cy *cy)
+
+void free_cy(t_cy *cy)
 {
 	t_cy *temp;
-	t_cy *free;
 
 	if (!cy)
 		return ;
 	while(cy->next)
 	{
-		free = cy;
-		temp = cy->next;
-		free(free);
-		cy = temp;
+		temp = cy;
+		cy = cy->next;
+		free(temp);
 	}
 	free(cy);
-}*/
-static void free_sph(t_sph *sph)
+}
+
+void free_sph(t_sph *sph)
 {
 	t_sph *temp;
 
@@ -42,28 +41,26 @@ static void free_sph(t_sph *sph)
 	}
 	free(sph);
 }
-/*
-static void free_pl(t_pl *pl)
+
+void free_pl(t_pl *pl)
 {
 	t_pl *temp;
-	t_pl *free;
 
 	if (!pl)
 		return ;
 	while(pl->next)
 	{
-		free = pl;
-		temp = pl->next;
-		free(free);
-		pl = temp;
+		temp = pl;
+		pl = pl->next;
+		free(temp);
 	}
-}*/
+}
 
 int free_struct(t_rt *rt)
 {
-	//free_pl(rt->pl);
+	free_pl(rt->pl);
 	free_sph(rt->sph);
-	//free_cy(rt->cy);
-	//free(rt);
+	free_cy(rt->cy);
+	free(rt);
 	return (0);
 }
