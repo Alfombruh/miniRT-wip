@@ -3,20 +3,18 @@
 static int ray_casting(t_rt *rt, int *color, int i, int j)
 {
 	(void) rt;
-	if (i + j % 2 == 1)
+	(void) j;
+	if ((i >= rt->w / 2 && i <= rt->w) && (j >= rt->h / 2 && j <= rt->h))
 	{
-		color = &rt->alight.tRGB;
-		return (*color);
+		*color = rt->alight.tRGB;
+		return (1);
 	}
 	return (0);
 }
 
 static void my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	char *dst;
-
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	img->addr[y * img->line_len + x] = color;
 }
 
 int ray_trace(t_rt *rt, t_mlx *mlx, t_img *img)

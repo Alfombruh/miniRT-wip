@@ -52,6 +52,7 @@ int get_vector(char *pos, t_vec *vec)
 	vec->x = ft_atoi(temp[0]);
 	vec->y = ft_atoi(temp[1]);
 	vec->z = ft_atoi(temp[2]);
+	free_double(temp);
 	if (vec->x != -1 && vec->x != 1 && vec->x != 0)
 		return (1);
 	if (vec->y != -1 && vec->y != 1 && vec->y != 0)

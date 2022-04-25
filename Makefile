@@ -1,6 +1,6 @@
 NAME 		= miniRT
 CC			= clang
-SFLAGS		= #-fsanitize=address -g3
+SFLAGS		= -fsanitize=address -g3
 CFLAGS		= -Werror -Wextra -Wall -ggdb3
 MLXFLAGS	= -L . -lmlx -framework OpenGL -framework Appkit
 RM 			= rm -rf

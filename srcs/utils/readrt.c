@@ -1,10 +1,14 @@
 #include "../../includes/minirt.h"
 #include <fcntl.h>
 #include <stdio.h>
-/*
+
 static void print_elements(t_rt *rt)
 {
 	int i = 1;
+	t_sph	*temps = rt->sph;
+	t_pl	*templ = rt->pl;
+	t_cy	*tempcy = rt->cy;
+
 	if (rt->alight.ratio)
 	{
 		printf(BHGRN "Ambien Light Ratio==%f\n", rt->alight.ratio);
@@ -55,8 +59,11 @@ static void print_elements(t_rt *rt)
 		printf("tRGB==%d\n" CLOSE, rt->cy->tRGB);
 		rt->cy = rt->cy->next;
 	}
+	rt->sph = temps;
+	rt->pl = templ;
+	rt->cy = tempcy;
 }
-*/
+
 static int fill_struct(char **values, t_rt *rt)
 {
 	int i;
@@ -116,6 +123,6 @@ int ft_readrt(char *argv, t_rt *rt)
 		s = get_next_line(fd);
 	}
 	free(s);
-	//print_elements(rt);
+	print_elements(rt);
 	return (0);
 }
