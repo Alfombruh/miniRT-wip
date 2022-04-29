@@ -10,7 +10,7 @@ t_vec v_new(double x, double y, double z)
 	return (v);
 }
 
-double	v_dis(t_vec *v, t_vec *w)
+double	v_dis(t_vec v, t_vec w)
 {
 	return (v_mod(v_sub(v, w)));
 }

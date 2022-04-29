@@ -13,7 +13,8 @@ FILES = srcs/main	\
 		srcs/utils/elements	\
 		srcs/utils/elements_linked \
 		srcs/utils/mlx_start \
-		srcs/utils/ray_trace 
+		srcs/utils/ray_trace \
+		srcs/utils/sphere_intersection
 
 SRCS = $(addsuffix .c, $(FILES))
 OBJS = $(addsuffix .o, $(FILES))

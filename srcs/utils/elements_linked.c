@@ -1,5 +1,4 @@
 #include "../../includes/minirt.h"
-#include <stdio.h>
 
 int element_sphere(char **v, t_rt *rt)
 {
@@ -22,7 +21,7 @@ int element_sphere(char **v, t_rt *rt)
 			rt->sph->next = temp;
 			rt->sph = rt->sph->next;
 		}
-		if (get_coord(v[1], rt->sph->coord))
+		if (get_coord(v[1], &rt->sph->coord))
 			return (1);
 		rt->sph->d = ft_atod(v[2]);
 		if (get_trgb(v[3], &rt->sph->tRGB))
@@ -50,7 +49,7 @@ int element_plane(char **v, t_rt *rt)
 				rt->pl = rt->pl->next;
 			rt->pl->next = temp;
 		}
-		if (get_coord(v[1], rt->pl->coord))
+		if (get_coord(v[1], &rt->pl->coord))
 			return (1);
 		if (get_vector(v[2], &rt->pl->n))
 			return (1);
@@ -78,7 +77,7 @@ int element_cylinder(char **v, t_rt *rt)
 				rt->cy = rt->cy->next;
 			rt->cy->next = temp;
 		}
-		if (get_coord(v[1], rt->cy->coord))
+		if (get_coord(v[1], &rt->cy->coord))
 			return (1);
 		if (get_vector(v[2], &rt->cy->n))
 			return (1);

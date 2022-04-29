@@ -25,18 +25,17 @@ int	get_trgb(char *color, int *tRGB)
 }
 
 
-
-////////////////////////COORD//////////////////////////
-int get_coord(char *pos, double *coord)
+////////////////////////VECTOR//////////////////////////
+int get_coord(char *pos, t_vec *vec)
 {
-	char	**temp;
-	int		i;
+	char **temp;
+
 	temp = ft_split(pos, ',');
 	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
 		return (1);
-	i = -1;
-	while(temp[++i])
-		coord[i] = ft_atod(temp[i]);
+	vec->x = ft_atoi(temp[0]);
+	vec->y = ft_atoi(temp[1]);
+	vec->z = ft_atoi(temp[2]);
 	free_double(temp);
 	return (0);
 }

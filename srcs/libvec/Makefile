@@ -4,7 +4,9 @@ CFLAGS = -Werror -Wall -Wextra
 RM = rm -rf
 FILES = vec_utils \
 		vec_basics \
-		vec_products
+		vec_products \
+		vec_rotations
+
 SRCS = $(addsuffix .c, $(FILES))
 OBJS = $(addsuffix .o, $(FILES))
 

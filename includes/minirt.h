@@ -1,6 +1,9 @@
 #ifndef MINIRT_H
 #define MINIRT_H
 
+# define WIDTH 1920
+# define HEIGHT 1080
+
 # define RED	"\033[0;31m"
 # define GREEN	"\033[0;32m"
 # define YELLOW	"\033[0;33m"
@@ -23,7 +26,6 @@
 #include "libft.h"
 #include "elements.h"
 #include "vectors.h"
-#include <math.h>
 
 typedef struct s_img
 {
@@ -32,8 +34,6 @@ typedef struct s_img
 	int			bpp;
 	int			line_len;
 	int			endian;
-	int 		wid;
-	int			hei;
 } 				t_img;
 
 typedef struct s_mlx
@@ -44,16 +44,27 @@ typedef struct s_mlx
 	struct s_rt *rt;
 }	t_mlx;
 
+typedef struct s_matrix
+{
+	double m[4][4];
+}	t_matrix;
+
+typedef struct s_ray
+{
+	t_vec	r;
+	t_vec	o;
+}	t_ray;
+
 typedef struct s_rt
 {	
-	int			h;
-	int			w;
 	t_alight	alight;
 	t_cam		cam;
 	t_light		light;
 	t_sph		*sph;
 	t_pl		*pl;
 	t_cy		*cy;
+	t_ray 		ray;//saves origin and dir of a ray, it is used in every pixel
+	t_matrix	m_cam;//matrix that represents cam
 } t_rt;
 
 //utils
@@ -71,9 +82,8 @@ int element_plane(char **s, t_rt *rt);
 int element_cylinder(char **s, t_rt *rt);
 
 int	get_trgb(char *color, int *tRGB);
-int get_coord(char *pos, double *coord);
+int get_coord(char *pos, t_vec *vec);
 int	get_vector(char *pos, t_vec *vec);
-
 
 int free_double(char **str);
 int free_struct(t_rt *rt);
@@ -82,7 +92,7 @@ void free_sph(t_sph *sph);
 void free_cy(t_cy *cy);
 
 int mlx_start(t_rt *rt);
-
-int ray_trace(t_rt *rt, t_mlx *mlx, t_img *img);
+int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img);
+int sphere_intersection(t_rt *rt, t_vec ray);
 
 #endif

@@ -5,9 +5,15 @@
 static void print_elements(t_rt *rt)
 {
 	int i = 1;
-	t_sph	*temps = rt->sph;
-	t_pl	*templ = rt->pl;
-	t_cy	*tempcy = rt->cy;
+	t_sph	*temps = NULL;
+	t_pl	*templ = NULL;
+	t_cy	*tempcy = NULL;
+	if (rt->sph)
+		temps = rt->sph;
+	if (rt->pl)
+		templ = rt->pl;
+	if (rt->cy)
+		tempcy = rt->cy;
 
 	if (rt->alight.ratio)
 	{
@@ -16,23 +22,23 @@ static void print_elements(t_rt *rt)
 	}
 	if (rt->cam.FOV)
 	{
-		printf(BHYEL "cam COORDS [x]=%f [y]=%f [z]=%f\n", rt->cam.coord[0], 
-				rt->cam.coord[1], rt->cam.coord[2]);
+		printf(BHYEL "cam COORDS [x]=%f [y]=%f [z]=%f\n", rt->cam.coord.x, 
+				rt->cam.coord.y, rt->cam.coord.z);
 		printf("CAM vector [x]=%f [y]=%f [z]=%f\n", rt->cam.n.x, rt->cam.n.y, rt->cam.n.z);
 		printf("FOV==%d\n" CLOSE, rt->cam.FOV);
 	}
 	if (rt->light.ratio)
 	{
 		printf(BHBLU "Light Ratio is==%f\n", rt->light.ratio);
-		printf("light COORDS [x]=%f [y]=%f [z]=%f\n" CLOSE, rt->light.coord[0], 
-				rt->light.coord[1], rt->light.coord[2]);
+		printf("light COORDS [x]=%f [y]=%f [z]=%f\n" CLOSE, rt->light.coord.x, 
+				rt->light.coord.y, rt->light.coord.z);
 	}
 	while(rt->sph)
 	{
 		printf(BHMAG "SPH n[%d]\n", i);
 		i++;
-		printf("sph COORDS [x]=%f [y]=%f [z]=%f\n", rt->sph->coord[0], 
-				rt->sph->coord[1], rt->sph->coord[2]);
+		printf("sph COORDS [x]=%f [y]=%f [z]=%f\n", rt->sph->coord.x, 
+				rt->sph->coord.y, rt->sph->coord.z);
 		printf("diameter==%f\n", rt->sph->d);
 		printf("tRGB==%d\n" CLOSE, rt->sph->tRGB);
 		rt->sph = rt->sph->next;
@@ -42,8 +48,8 @@ static void print_elements(t_rt *rt)
 	{
 		printf(BHCYN "PL n[%d]\n", i);
 		i++;
-		printf("pl COORDS [x]=%f [y]=%f [z]=%f\n", rt->pl->coord[0], 
-				rt->pl->coord[1], rt->pl->coord[2]);
+		printf("pl COORDS [x]=%f [y]=%f [z]=%f\n", rt->pl->coord.x, 
+				rt->pl->coord.y, rt->pl->coord.z);
 		printf("tRGB==%d\n" CLOSE, rt->pl->tRGB);
 		rt->pl = rt->pl->next;
 	}
@@ -52,8 +58,8 @@ static void print_elements(t_rt *rt)
 	{
 		printf(BHWHT "CY n[%d]\n", i);
 		i++;
-		printf("cy COORDS [x]=%f [y]=%f [z]=%f\n", rt->cy->coord[0], 
-				rt->cy->coord[1], rt->cy->coord[2]);
+		printf("cy COORDS [x]=%f [y]=%f [z]=%f\n", rt->cy->coord.x, 
+				rt->cy->coord.y, rt->cy->coord.z);
 		printf("diameter==%f\n", rt->cy->d);
 		printf("height==%f\n", rt->cy->h);
 		printf("tRGB==%d\n" CLOSE, rt->cy->tRGB);

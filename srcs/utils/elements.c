@@ -17,7 +17,7 @@ int element_camera(char **v, t_rt *rt)
 {
 	if (v[3] && !v[4])
 	{
-		if (get_coord(v[1], rt->cam.coord))
+		if (get_coord(v[1], &rt->cam.coord))
 			return (1);
 		if (get_vector(v[2], &rt->cam.n))
 			return (1);
@@ -34,7 +34,7 @@ int element_light(char **v, t_rt *rt)
 {
 	if (v[3] && !v[4])
 	{
-		get_coord(v[1], rt->light.coord);//preguntar si devuelve 1
+		get_coord(v[1], &rt->light.coord);//preguntar si devuelve 1
 		rt->light.ratio = ft_atod(v[2]);
 		// BONUS get_trgb(v[3], &rt->light.tRGB);//preguntar si devuelve 1
 	}

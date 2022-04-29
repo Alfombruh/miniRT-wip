@@ -1,6 +1,5 @@
 #include "../../includes/minirt.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 int free_double(char **str)
 {
@@ -32,7 +31,6 @@ void free_sph(t_sph *sph)
 {
 	t_sph *temp;
 
-	printf("%f\n", sph->d);
 	if (!sph)
 		return ;
 	while(sph->next)
