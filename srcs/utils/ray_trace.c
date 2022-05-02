@@ -1,13 +1,15 @@
 #include "../../includes/minirt.h"
 #include <math.h>
 #include <stdio.h>
-
+/*
 static void ray_origin(t_rt *rt)
 {
 	rt->ray.r = rt->cam.n;
+	rt->ray.r = v_normalize(rt->ray.r);
 	rt->ray.o = rt->cam.coord;
+	rt->ray.o = v_normalize(rt->ray.o);
 }
-
+*/
 //https://www.youtube.com/watch?v=KBK6g6RFgdA
 //Tenemos el vector de la camara (cam->v) y un vector que mira hacia arriba (up)
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +41,7 @@ static void ray_origin(t_rt *rt)
 	M.m[1][1] = u.y;
 	M.m[1][2] = u.z;
 	M.m[1][3] = 0;
-	M.m[2][0] = cam->n.x;
+	M.m[2][0] = cam->n.x;be 
 	M.m[2][1] = cam->n.y;
 	M.m[2][2] = cam->n.z;
 	M.m[2][3] = 0;
@@ -52,8 +54,40 @@ static void ray_origin(t_rt *rt)
 */
 //places ray in the cam
 //https://www.youtube.com/watch?v=_DHW3KhqR40
-static t_vec place_ray(t_rt *rt, int i, int j)
+static t_vec place_ray(t_rt *rt, double i, double j)
 {
+
+	//EDURNE
+	t_vec 	ray;
+	double	x;
+	double	y;
+	//
+	x = (rt->cam.FOV / 2.0) - (((rt->cam.FOV / 2.0) / ((double)WIDTH / 2.0)) * i);
+	y = (rt->cam.FOV / 2.0) - (((rt->cam.FOV / 2.0) / ((double)HEIGHT / 2.0)) * j);
+	//
+	ray = v_rotatez(rt->cam.n, x);
+	ray = v_rotatey(rt->cam.n, y);
+//if (j == HEIGHT / 2)
+//		printf ("x=%f && y=%f && z=%f\n", ray.x, ray.y, ray.z);
+	return (ray);
+	//
+	//ojo!!! cuando ese int sea mayor que fov/2 la rotacion que le debemos mandar es negativa para que rote restando a la posicion de origen.
+	//
+
+
+
+//	return (v_new(x, y, z));
+	//JAMBO VIDEO RtX
+/*	(void) rt;
+	double	u;
+	double	v;
+
+	//ray_origin(rt);
+	u = i - ((double)WIDTH / 2.0) + ((double)HEIGHT / 2.0) / (double) HEIGHT * 2 *  - 1;
+	v = -(j / (double) HEIGHT * 2 - 1);
+	return (v_new(u, v, 0));
+*/	//JOSE
+/*
 	double	x;
 	double	y;
 	double	VOF;
@@ -61,12 +95,13 @@ static t_vec place_ray(t_rt *rt, int i, int j)
 
 	x = i;
 	y = j;
-	ray_origin(rt);
-	VOF = tan(((double)rt->cam.FOV / (2 * M_PI)) / 180); 
+	//ray_origin(rt);
+	VOF = tan(((double)rt->cam.FOV / (2.0 * M_PI)) / 180.0); 
 	a_ratio = (double)WIDTH / (double)HEIGHT;
 	x = (2 * (x + 0.5) / (double)WIDTH - 1) * VOF * a_ratio;
 	y = (1 - 2 * (y + 0.5) / (double)HEIGHT - 1) * VOF;
 	return (v_new(-x, y, 1));
+	*/
 }
 
 static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
@@ -74,11 +109,10 @@ static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
 	t_vec	target;
 
 	(void) target;
+	ray = v_normalize(ray);
 	//printf("vector is:\nv.x==%f\tv.y==%f\tv.z==%f\n", ray.x, ray.y, ray.z);
-	if (sphere_intersection(rt, ray) != -1)
-	{
+	if (sphere_intersection(rt->sph, ray) != -1)
 		*color = rt->sph->tRGB;
-	}
 	// targe = ray * cam matrix
 	// target - cam coord
 	// norm(target)
@@ -104,8 +138,8 @@ int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img)
 		while (++i < WIDTH)
 		{
 			ray = place_ray(rt, i, j);
-			ray = ray_casting(rt, ray, &color);
-			img->addr[j * img->line_len + i] = color;
+			ray_casting(rt, ray, &color);
+			img->addr[j * img->line_len + i] = color; 
 			color = 0;
 		}
 	}

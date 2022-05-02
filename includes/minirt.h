@@ -93,6 +93,6 @@ void free_cy(t_cy *cy);
 
 int mlx_start(t_rt *rt);
 int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img);
-int sphere_intersection(t_rt *rt, t_vec ray);
+int sphere_intersection(t_sph *sph, t_vec ray);
 
 #endif
