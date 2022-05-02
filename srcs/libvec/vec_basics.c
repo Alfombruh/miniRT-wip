@@ -38,8 +38,7 @@ t_vec	v_scal(t_vec v, double scal)
 //gets the lenght of the vecto by doing pythagoras in 3D, wich is basically a dot_product of the product by itself
 double v_mod(t_vec v)
 {
-	return (sqrt(powf(v.x, 2) + powf(v.y, 2) + powf(v.z, 2)));
-	//return (sqrt(v_dot(v, v)));
+	return (sqrt(v_dot(v, v)));
 }
 
 //converts a vector to its unit vector, same as a v_scal but dividing but the module

@@ -3,13 +3,7 @@
 //Dot Product of two vectors https://en.wikipedia.org/wiki/Dot_product
 double	v_dot(t_vec v, t_vec w)
 {
-	double	total;
-
-	total = 0.0;
-	total += v.x * w.x;
-	total += v.y * w.y;
-	total += v.y * w.y;
-	return (total);
+	return ((v.x * w.x) + (v.y * w.y) + (v.z * w.z));
 }
 
 // Cross Product of two vectors https://en.wikipedia.org/wiki/Cross_product

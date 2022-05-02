@@ -56,52 +56,22 @@ static void ray_origin(t_rt *rt)
 //https://www.youtube.com/watch?v=_DHW3KhqR40
 static t_vec place_ray(t_rt *rt, double i, double j)
 {
-
-	//EDURNE
 	t_vec 	ray;
 	double	x;
 	double	y;
-	//
+	
 	x = (rt->cam.FOV / 2.0) - (((rt->cam.FOV / 2.0) / ((double)WIDTH / 2.0)) * i);
 	y = (rt->cam.FOV / 2.0) - (((rt->cam.FOV / 2.0) / ((double)HEIGHT / 2.0)) * j);
-	//
-	ray = v_rotatez(rt->cam.n, x);
-	ray = v_rotatey(rt->cam.n, y);
-//if (j == HEIGHT / 2)
-//		printf ("x=%f && y=%f && z=%f\n", ray.x, ray.y, ray.z);
+	
+	ray = v_rotatez(rt->cam.n, y);
+	ray = v_rotatey(ray, x);
+	if (j == WIDTH / 2)
+	{
+		printf("x == %f y == %f\n", x, y);
+		printf("ray x=%f y=%f z=%f\n", ray.x, ray.y, ray.z);
+	}
 	return (ray);
-	//
 	//ojo!!! cuando ese int sea mayor que fov/2 la rotacion que le debemos mandar es negativa para que rote restando a la posicion de origen.
-	//
-
-
-
-//	return (v_new(x, y, z));
-	//JAMBO VIDEO RtX
-/*	(void) rt;
-	double	u;
-	double	v;
-
-	//ray_origin(rt);
-	u = i - ((double)WIDTH / 2.0) + ((double)HEIGHT / 2.0) / (double) HEIGHT * 2 *  - 1;
-	v = -(j / (double) HEIGHT * 2 - 1);
-	return (v_new(u, v, 0));
-*/	//JOSE
-/*
-	double	x;
-	double	y;
-	double	VOF;
-	double	a_ratio; //aspect ratio, 16:9 by default
-
-	x = i;
-	y = j;
-	//ray_origin(rt);
-	VOF = tan(((double)rt->cam.FOV / (2.0 * M_PI)) / 180.0); 
-	a_ratio = (double)WIDTH / (double)HEIGHT;
-	x = (2 * (x + 0.5) / (double)WIDTH - 1) * VOF * a_ratio;
-	y = (1 - 2 * (y + 0.5) / (double)HEIGHT - 1) * VOF;
-	return (v_new(-x, y, 1));
-	*/
 }
 
 static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
@@ -128,6 +98,7 @@ int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img)
 	int	j;
 	int color;
 	t_vec ray;
+	(void) mlx;
 
 	j = -1;
 	color = 0;
@@ -143,6 +114,7 @@ int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img)
 			color = 0;
 		}
 	}
+	//exit (1);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
 	return (0);
 }
