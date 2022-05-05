@@ -37,17 +37,23 @@ int element_sphere(char **v, t_rt *rt)
 int element_plane(char **v, t_rt *rt)
 {
 	t_pl *temp;
+	t_pl *head;
 
 	if (v[3] && !v[4])
 	{
 		temp = (t_pl *)malloc(sizeof(t_pl));
 		if (!rt->pl)
+		{
 			rt->pl = temp;
+			head = rt->pl;
+		}
 		else
 		{
+			head = rt->pl;
 			while (rt->pl->next)
 				rt->pl = rt->pl->next;
 			rt->pl->next = temp;
+			rt->pl = rt->pl->next;
 		}
 		if (get_coord(v[1], &rt->pl->coord))
 			return (1);
@@ -56,6 +62,7 @@ int element_plane(char **v, t_rt *rt)
 		if (get_trgb(v[3], &rt->pl->tRGB))
 			return (1);
 		rt->pl->next = NULL;
+		rt->pl = head;
 	}
 	else
 		return (1);
@@ -64,18 +71,24 @@ int element_plane(char **v, t_rt *rt)
 
 int element_cylinder(char **v, t_rt *rt)
 {
-	t_cy *temp;
+	t_cy 	*temp;
+	t_cy	*head;
 
 	if (v[5] && !v[6])
 	{
 		temp = (t_cy *)malloc(sizeof(t_cy));
 		if (!rt->cy)
+		{
 			rt->cy = temp;
+			head = rt->cy;
+		}
 		else
 		{
+			head = rt->cy;
 			while (rt->cy->next)
 				rt->cy = rt->cy->next;
 			rt->cy->next = temp;
+			rt->cy = rt->cy->next;
 		}
 		if (get_coord(v[1], &rt->cy->coord))
 			return (1);
@@ -86,6 +99,7 @@ int element_cylinder(char **v, t_rt *rt)
 		if (get_trgb(v[5], &rt->cy->tRGB))
 			return (1);
 		rt->cy->next = NULL;
+		rt->cy = head;
 	}
 	else
 		return (1);

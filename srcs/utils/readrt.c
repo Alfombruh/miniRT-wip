@@ -25,7 +25,7 @@ static void print_elements(t_rt *rt)
 		printf(BHYEL "cam COORDS [x]=%f [y]=%f [z]=%f\n", rt->cam.coord.x, 
 				rt->cam.coord.y, rt->cam.coord.z);
 		printf("CAM vector [x]=%f [y]=%f [z]=%f\n", rt->cam.n.x, rt->cam.n.y, rt->cam.n.z);
-		printf("FOV==%d\n" CLOSE, rt->cam.FOV);
+		printf("FOV==%f\n" CLOSE, rt->cam.FOV);
 	}
 	if (rt->light.ratio)
 	{
@@ -50,6 +50,7 @@ static void print_elements(t_rt *rt)
 		i++;
 		printf("pl COORDS [x]=%f [y]=%f [z]=%f\n", rt->pl->coord.x, 
 				rt->pl->coord.y, rt->pl->coord.z);
+		printf("pl vector [x]=%f [y]=%f [z]=%f\n", rt->pl->n.x, rt->pl->n.y, rt->pl->n.z);
 		printf("tRGB==%d\n" CLOSE, rt->pl->tRGB);
 		rt->pl = rt->pl->next;
 	}
@@ -60,6 +61,7 @@ static void print_elements(t_rt *rt)
 		i++;
 		printf("cy COORDS [x]=%f [y]=%f [z]=%f\n", rt->cy->coord.x, 
 				rt->cy->coord.y, rt->cy->coord.z);
+		printf("cy vector [x]=%f [y]=%f [z]=%f\n", rt->cy->n.x, rt->cy->n.y, rt->cy->n.z);
 		printf("diameter==%f\n", rt->cy->d);
 		printf("height==%f\n", rt->cy->h);
 		printf("tRGB==%d\n" CLOSE, rt->cy->tRGB);

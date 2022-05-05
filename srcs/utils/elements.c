@@ -21,7 +21,7 @@ int element_camera(char **v, t_rt *rt)
 			return (1);
 		if (get_vector(v[2], &rt->cam.n))
 			return (1);
-		rt->cam.FOV = ft_atoi(v[3]);
+		rt->cam.FOV = ft_atod(v[3]);
 		if (rt->cam.FOV > 180 || rt->cam.FOV <= 0)
 			return (1);
 	}

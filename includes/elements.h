@@ -13,7 +13,7 @@ typedef struct s_cam
 {
 	t_vec	coord; //[0]=x [1]=y [2]=z
 	t_vec	n; // t_vector n; //normalized orientation vector [0]=x [1]=y [2]=z
-	int		FOV; //Field Of View, campoo de vision [0-180]degrees
+	double		FOV; //Field Of View, campoo de vision [0-180]degrees
 } t_cam;
 
 typedef struct s_light

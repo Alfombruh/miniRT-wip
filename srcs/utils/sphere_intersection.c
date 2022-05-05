@@ -1,5 +1,6 @@
 #include "../../includes/minirt.h"
 #include <math.h>
+#include <stdio.h>
 
 static void double_swap(double *i, double *j)
 {
@@ -10,7 +11,7 @@ static void double_swap(double *i, double *j)
 	*j = temp;
 }
 	
-int sphere_intersection(t_sph *sph, t_vec ray)
+double sphere_intersection(t_sph *sph, t_vec ray)
 {
 	t_vec	l;
 	double	tca;
