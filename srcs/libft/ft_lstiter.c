@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/13 18:44:15 by eperaita          #+#    #+#             */
-/*   Updated: 2021/08/16 15:55:03 by eperaita         ###   ########.fr       */
+/*   Created: 2021/06/04 12:23:56 by jofernan          #+#    #+#             */
+/*   Updated: 2021/06/04 12:23:57 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (!lst || !f)
+	if (!f || !lst)
 		return ;
 	while (lst)
 	{

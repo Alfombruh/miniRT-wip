@@ -6,17 +6,36 @@
 /*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 12:58:24 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/06 21:19:24 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:19:20 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char	*ft_strstr(const char *str, const char *to_find)
 {
-	if (!s1)
-		return (0);
-	while (*s1 == *s2++)
-		if (*s1++ == 0)
-			return (0);
-	return (*(unsigned char *)s1 - *(unsigned char *)--s2);
+	char	*a;
+	char	*b;
+
+	b = (char *)to_find;
+	if (!*b)
+	{
+		return ((char *)str);
+	}
+	while (*str)
+	{
+		if (*str != *b)
+		{
+			str++;
+			continue ;
+		}
+		a = (char *)str;
+		while (*a++ == *b++)
+		{
+			if (!*b)
+				return ((char *)str);
+		}
+		b = (char *)to_find;
+		str++;
+	}
+	return (NULL);
 }

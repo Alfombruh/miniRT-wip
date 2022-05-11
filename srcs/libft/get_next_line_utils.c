@@ -1,69 +1,116 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/21 16:03:53 by eperaita          #+#    #+#             */
-/*   Updated: 2021/10/29 10:44:08 by eperaita         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
-#include <stdio.h>
 
-char	*ft_line_break(char *str)
+size_t	ft_gnl_strlen(char	*s)
 {
-	int	i;
+	size_t	c;
 
-	i = 0;
+	c = 0;
+	if (!s)
+		return (0);
+	while (s[c] != '\0')
+	{
+		c++;
+	}
+	return (c);
+}
+
+char	*ft_gnl_strjoin(char *cache, char *buff)
+{
+	size_t	pos;
+	size_t	pos2;
+	char	*str;
+
+	if (!cache)
+	{
+		cache = (char *)malloc(1 * sizeof(char));
+		cache[0] = '\0';
+	}
+	if (!cache || !buff)
+		return (NULL);
+	str = malloc(sizeof(char) * ((ft_gnl_strlen(cache)
+					+ ft_gnl_strlen(buff)) + 1));
+	if (str == NULL)
+		return (NULL);
+	pos = -1;
+	pos2 = 0;
+	if (cache)
+		while (cache[++pos] != '\0')
+			str[pos] = cache[pos];
+	while (buff[pos2] != '\0')
+		str[pos++] = buff[pos2++];
+	str[ft_gnl_strlen(cache) + ft_gnl_strlen(buff)] = '\0';
+	free(cache);
+	return (str);
+}
+
+char	*ft_line(char *cache)
+{
+	int		pos;
+	char	*str;
+
+	pos = 0;
+	if (!cache[pos])
+		return (NULL);
+	while (cache[pos] && cache[pos] != '\n')
+		pos++;
+	str = (char *)malloc(sizeof(char) * (pos + 2));
 	if (!str)
 		return (NULL);
-	while (str[i])
+	pos = 0;
+	while (cache[pos] && cache[pos] != '\n')
 	{
-		if (str[i] == '\n')
-			return (&str[i]);
-		i++;
+		str[pos] = cache[pos];
+		pos++;
 	}
-	return (NULL);
+	if (cache[pos] == '\n')
+	{
+		str[pos] = cache[pos];
+		pos++;
+	}
+	str[pos] = '\0';
+	return (str);
 }
 
-char	*ft_join(char *temp, char *buff)
+char	*ft_newcache(char *cache)
 {
-	char	*new;
-	int		i;
+	int		pos;
+	int		pos2;
+	char	*str;
 
-	i = 0;
-	if (!temp || !buff)
+	pos = 0;
+	while (cache[pos] && cache[pos] != '\n')
+		pos++;
+	if (!cache[pos])
+	{
+		free(cache);
 		return (NULL);
-	new = malloc((ft_strlen(temp) + ft_strlen(buff) + 1) * sizeof(char));
-	if (!new)
+	}
+	str = (char *)malloc(sizeof(char) * (ft_gnl_strlen(cache) - pos + 1));
+	if (!str)
 		return (NULL);
-	while (*temp)
-		new[i++] = *temp++;
-	while (*buff)
-		new[i++] = *buff++;
-	new[i] = '\0';
-	return (new);
+	pos++;
+	pos2 = 0;
+	while (cache[pos])
+		str[pos2++] = cache[pos++];
+	str[pos2] = '\0';
+	free(cache);
+	return (str);
 }
 
-char	*ft_substr_gnl(char *str, int start, size_t len)
+char	*ft_gnl_strchr(char *s, int c)
 {
-	char	*new;
-	int		i;
+	int	pos;
 
-	i = 0;
-	if (!str || len <= 0)
-		return (NULL);
-	new = malloc((len + 1) * sizeof(char));
-	if (!new)
-		return (NULL);
-	while (len)
+	pos = 0;
+	if (!s)
+		return (0);
+	if (c == '\0')
+		return ((char *)&s[ft_gnl_strlen(s)]);
+	while (s[pos] != '\0')
 	{
-		new[i++] = str[start++];
-		len--;
+		if (s[pos] == (char) c)
+			return ((char *)&s[pos]);
+		pos++;
 	}
-	new[i] = '\0';
-	return (new);
+	return (0);
 }

@@ -3,25 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 13:05:19 by eperaita          #+#    #+#             */
-/*   Updated: 2021/08/05 20:18:03 by eperaita         ###   ########.fr       */
+/*   Created: 2021/06/03 12:59:25 by jofernan          #+#    #+#             */
+/*   Updated: 2021/06/03 12:59:26 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
+
+static char	*ft_strcpy(char	*dest, const char	*src)
+{
+	int	count;
+
+	count = 0;
+	while (*(src + count) != '\0')
+	{
+		*(dest + count) = *(src + count);
+		count++;
+	}
+	dest[count] = '\0';
+	return (dest);
+}
 
 char	*ft_strdup(const char *s1)
 {
-	char	*p;
-	size_t	len;
-	size_t	i;
+	char	*ptr;
+	int		len;
+	int		i;
 
-	len = ft_strlen(s1);
-	i = 0;
-	p = (char *)malloc((len + 1) * sizeof(char));
-	if (!p)
+	len = 0;
+	while (s1[len])
+		len++;
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (ptr == NULL)
 		return (NULL);
-	ft_strlcpy(p, (char *)s1, len + 1);
-	return (p);
+	i = 0;
+	ft_strcpy(ptr, s1);
+	return (ptr);
 }

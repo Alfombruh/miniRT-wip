@@ -1,96 +1,55 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                           :::      ::::::::  #
-#  Makefile                                               :+:      :+:    :+:  #
-#                                                       +:+ +:+         +:+    #
-#  By: eperaita <eperaita@student.42urduliz.com>      +#+  +:+       +#+       #
-#                                                   +#+#+#+#+#+   +#+          #
-#  Created: 2021/07/21 15:45:25 by eperaita              #+#    #+#            #
-#  Updated: 2021/08/03 15:30:27 by eperaita             ###   ########.fr      #
-#                                                                              #
-# **************************************************************************** #
+NAME	= libft.a
+CC		= gcc
+RM		= rm -f
+CFLAGS	= -Wall -Wextra -Werror -I. #-fsanitize=address -g3
 
-NAME = libft.a
+FILES	=	ft_isalnum ft_isprint ft_memcmp  ft_putchar_fd ft_split \
+			ft_strlcat ft_strncmp ft_substr ft_atoi ft_isalpha \
+			ft_itoa ft_memcpy  ft_putendl_fd ft_strchr  ft_strlcpy \
+			ft_strnstr ft_tolower ft_bzero   ft_isascii ft_memccpy \
+			ft_memmove ft_putnbr_fd  ft_strdup  ft_strlen  ft_strrchr \
+			ft_toupper ft_calloc  ft_isdigit ft_memchr  ft_memset  ft_strstr \
+			ft_putstr_fd  ft_strjoin ft_strmapi ft_strtrim ft_strcmp ft_union \
+			ft_printf/extra/ft_pitoa \
+			ft_printf/extra/ft_putstr_int \
+			ft_printf/extra/write_nbr \
+			ft_printf/extra/ft_putchar_int \
+			ft_printf/extra/ft_hex_itoa \
+			ft_printf/extra/write_hex_caps \
+			ft_printf/extra/write_char \
+			ft_printf/extra/write_pointer \
+			ft_printf/extra/ft_strupper \
+			ft_printf/extra/ft_putnbr_base_int \
+			ft_printf/extra/ft_putnbr_uint \
+			ft_printf/extra/write_hex \
+			ft_printf/extra/write_string \
+			ft_printf/extra/ft_putnbr_int \
+			ft_printf/extra/write_int \
+			ft_printf/srcs/ft_printf \
+			ft_lstadd_back ft_lstadd_front ft_lstclear \
+			ft_lstdelone ft_lstiter ft_lstlast \
+			ft_lstmap ft_lstnew ft_lstsize \
+			get_next_line get_next_line_utils\
+			ft_atod
 
-SRC =   ft_isalpha.c\
-		ft_isdigit.c\
-		ft_isalnum.c\
-		ft_isascii.c\
-		ft_isprint.c\
-		ft_strlen.c\
-		ft_strlcpy.c\
-		ft_strlcat.c\
-		ft_strncmp.c\
-		ft_strcmp.c\
-		ft_toupper.c\
-		ft_tolower.c\
-		ft_strnstr.c\
-		ft_atoi.c\
-		ft_strchr.c\
-		ft_strrchr.c\
-		ft_memset.c\
-		ft_bzero.c\
-		ft_memchr.c\
-		ft_memcmp.c\
-		ft_memcpy.c\
-		ft_memmove.c\
-		ft_calloc.c\
-		ft_strdup.c\
-		ft_substr.c\
-		ft_strjoin.c\
-		ft_strtrim.c\
-		ft_split.c\
-		ft_itoa.c\
-		ft_putchar_fd.c\
-		ft_putstr_fd.c\
-		ft_putendl_fd.c\
-		ft_putnbr_fd.c\
-		ft_strmapi.c\
-		ft_striteri.c\
-		get_next_line.c\
-		get_next_line_utils.c\
-		ft_lstnew.c\
-		ft_lstadd_front.c\
-        ft_lstsize.c\
-        ft_lstlast.c\
-        ft_lstadd_back.c\
-        ft_lstdelone.c\
-        ft_lstclear.c\
-        ft_lstiter.c\
-        ft_lstmap.c\
-		ft_atod.c\
-		ft_printf_csdi.c\
-		ft_printf_u.c\
-		ft_printf_xxp.c\
-		ft_printf.c\
-		
-INCLUDES = libft.h
+SRCS = $(addsuffix .c, $(FILES))
+OBJS = $(addsuffix .o, $(FILES))
 
-OBJ = $(SRC:.c=.o)
+all:	$(NAME)
 
-CC = gcc
-AR = ar rc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
+.c.o:	$(SRCS)
+		$(CC) $(CFLAGS) -c $^ -o $@
 
-
-
-all: $(NAME)
-
-$(NAME) : $(OBJ) $(INCLUDES)
-	@$(AR) $(NAME) $(OBJ)
-
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $(SRC) $(SRC_BONUS)
-
-
+$(NAME):	$(OBJS)
+			ar rcs $(NAME) $(OBJS)
 
 clean:
-	@$(RM) $(OBJ) $(OBJ_BONUS)
+		$(RM) $(OBJS) $(BONUS_OBJS)
 
-fclean: clean
-	@$(RM) $(NAME)
+fclean:	clean
+		$(RM) $(NAME)
 
-re: fclean all
+re:	fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY:			all clean fclean re
+

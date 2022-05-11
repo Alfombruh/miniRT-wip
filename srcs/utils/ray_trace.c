@@ -2,6 +2,33 @@
 #include <math.h>
 #include <stdio.h>
 
+//https://www.youtube.com/watch?v=ggHSrlrP5zI 
+//a quick video about cameras in a raytracer
+static void	cam_to_origin(t_matrix *cam, t_rt *rt)
+{
+	t_vec	up;
+	t_vec	right;
+
+	right = v_normalize(v_cross(rt->cam.n, v_new(0,1,0)));
+	up = v_cross(rt->cam.n, right);
+	cam->m[0][0] = right.x;
+	cam->m[0][1] = right.y;
+	cam->m[0][2] = right.z;
+	cam->m[0][3] = 0; 
+	cam->m[1][0] = up.x;
+	cam->m[1][1] = up.y;
+	cam->m[1][2] = up.z;
+	cam->m[1][3] = 0;
+	cam->m[2][0] = rt->cam.n.x;
+	cam->m[2][1] = rt->cam.n.y;
+	cam->m[2][2] = rt->cam.n.z;
+	cam->m[2][3] = 0;
+	cam->m[3][0] = rt->cam.coord.x;
+	cam->m[3][1] = rt->cam.coord.y;
+	cam->m[3][2] = rt->cam.coord.z;
+	cam->m[3][3] = 1;
+}
+
 static t_vec place_ray(t_rt *rt, double i, double j)
 {
 	double	x;
@@ -27,8 +54,8 @@ static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
 	node = (void *)rt->sph;
 	while (rt->sph)
 	{
-		dist = sphere_intersection(rt->sph, ray);
-		if (dist < catched && dist != -1)
+		dist = sphere_intersection(rt->sph, ray, rt);
+		if (dist < catched && dist != -1 && dist < 100) // si esta mas cerca que el anterior objeto y si el rayo intersecta
 		{
 			catched = dist;
 			*color = rt->sph->tRGB;
@@ -39,8 +66,8 @@ static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
 	node = (void *)rt->cy;
 	while (rt->cy)
 	{
-		dist = cylinder_intersection(rt->cy, ray);
-		if (dist < catched && dist != -1 )
+		dist = cylinder_intersection(rt->cy, ray, rt);
+		if (dist < catched && dist != -1 && dist < 100)
 		{
 			catched = dist;
 			*color = rt->cy->tRGB;
@@ -51,12 +78,13 @@ static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
 	node = (void *)rt->pl;
 	while (rt->pl)
 	{
-		dist = plane_intersection(rt->pl, ray);
-		if (dist < catched && dist > 0)
+		dist = plane_intersection(rt->pl, ray, rt);
+		if (dist < catched && dist > 0 && dist < 100) // si esta mas cerca que el anterior onbjeto y si el rayo intersecta
 		{
 			catched = dist;
 			*color = rt->pl->tRGB;
 		}
+		
 		rt->pl = rt->pl->next;
 	}
 	rt->pl = (t_pl *)node;
@@ -72,6 +100,7 @@ int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img)
 
 	j = -1;
 	color = 0;
+	cam_to_origin(&rt->m_cam, rt);
 	while (++j < HEIGHT)
 	{
 		i = -1;

@@ -84,6 +84,7 @@ int element_cylinder(char **s, t_rt *rt);
 int	get_trgb(char *color, int *tRGB);
 int get_coord(char *pos, t_vec *vec);
 int	get_vector(char *pos, t_vec *vec);
+int	color_add(int trgb1, int trgb2);
 
 int free_double(char **str);
 int free_struct(t_rt *rt);
@@ -93,8 +94,8 @@ void free_cy(t_cy *cy);
 
 int mlx_start(t_rt *rt);
 int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img);
-double sphere_intersection(t_sph *sph, t_vec ray);
-double cylinder_intersection(t_cy *cy, t_vec ray);
-double plane_intersection(t_pl *pl, t_vec ray);
+double sphere_intersection(t_sph *sph, t_vec ray, t_rt *rt);
+double cylinder_intersection(t_cy *cy, t_vec ray, t_rt *rt);
+double plane_intersection(t_pl *pl, t_vec ray, t_rt *rt);
 
 #endif

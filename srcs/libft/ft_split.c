@@ -3,94 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/09 13:12:37 by eperaita          #+#    #+#             */
-/*   Updated: 2021/10/18 13:50:49 by eperaita         ###   ########.fr       */
+/*   Created: 2021/06/03 12:59:14 by jofernan          #+#    #+#             */
+/*   Updated: 2021/06/03 12:59:16 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-char	**ft_freepointer(char **p, size_t num_arrays)
+static char	**ft_malloc_error(char **tab)
 {
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
-	while (i < (num_arrays + 1))
+	while (tab[i])
 	{
-		free(&p[i]);
+		free(tab[i]);
 		i++;
 	}
-	free(p);
-	return (0);
+	free(tab);
+	return (NULL);
 }
 
-char	**ft_fill(char **p, char *s, char c, size_t num_arrays)
+static unsigned int	ft_get_nb_strs(char const *s, char c)
 {
-	size_t	a;
-	size_t	i;
-	size_t	j;
+	unsigned int	i;
+	unsigned int	nb_strs;
 
+	if (!s[0])
+		return (0);
 	i = 0;
-	a = 0;
-	while (a < num_arrays && s[i])
-	{
-		if (s[i] != c)
-		{
-			j = 0;
-			while (s[i] != c && s[i])
-			{
-				j++;
-				i++;
-			}
-			p[a] = ft_substr(s, i - j, j);
-			if (!p[a])
-				return (ft_freepointer(p, num_arrays));
-			a++;
-		}
+	nb_strs = 0;
+	while (s[i] && s[i] == c)
 		i++;
-	}
-	p[a] = NULL;
-	return (p);
-}
-
-size_t	ft_num_arrays(char *s, char c)
-{
-	size_t	i;
-	size_t	n;
-
-	i = 0;
-	n = 0;
 	while (s[i])
 	{
 		if (s[i] == c)
 		{
-			while (s[i] == c && s[i])
+			nb_strs++;
+			while (s[i] && s[i] == c)
 				i++;
+			continue ;
 		}
-		else
-		{
-			while (s[i] != c && s[i])
-				i++;
-			n++;
-		}
+		i++;
 	}
-	return (n);
+	if (s[i - 1] != c)
+		nb_strs++;
+	return (nb_strs);
+}
+
+static void	ft_get_next_str(char **next_str, unsigned int *next_str_len, char c)
+{
+	unsigned int	i;
+
+	*next_str += *next_str_len;
+	*next_str_len = 0;
+	i = 0;
+	while (**next_str && **next_str == c)
+		(*next_str)++;
+	while ((*next_str)[i])
+	{
+		if ((*next_str)[i] == c)
+			return ;
+		(*next_str_len)++;
+		i++;
+	}
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**p;
-	size_t	a;
-	size_t	num_arrays;
+	char			**tab;
+	char			*next_str;
+	unsigned int	next_str_len;
+	unsigned int	i;
 
-	a = 0;
 	if (!s)
-		return (0);
-	num_arrays = ft_num_arrays ((char *)s, c);
-	p = (char **)malloc((num_arrays + 1) * sizeof(char *));
-	if (!p)
-		return (0);
-	p = ft_fill(p, (char *)s, c, num_arrays);
-	return (p);
+		return (NULL);
+	tab = (char **)malloc(sizeof(char *) * (ft_get_nb_strs(s, c) + 1));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	next_str = (char *)s;
+	next_str_len = 0;
+	while (i < ft_get_nb_strs(s, c))
+	{
+		ft_get_next_str(&next_str, &next_str_len, c);
+		tab[i] = (char *)malloc(sizeof(char) * (next_str_len + 1));
+		if (!tab[i])
+			return (ft_malloc_error(tab));
+		ft_strlcpy(tab[i], next_str, next_str_len + 1);
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
 }

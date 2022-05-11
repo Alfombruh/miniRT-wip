@@ -3,58 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/10 15:16:51 by eperaita          #+#    #+#             */
-/*   Updated: 2021/08/30 11:06:41 by eperaita         ###   ########.fr       */
+/*   Created: 2021/06/03 12:58:24 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/06 21:21:29 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_fill_char(char *buff, size_t len, long n, size_t neg)
+static void	ft_char(int nb, char *str, int i)
 {
-	buff[len + neg] = '\0';
-	while (len)
-	{
-		len--;
-		buff[len + neg] = n % 10 + '0';
-		n /= 10;
-	}
-	if (neg == 1)
-		buff[0] = '-';
-	return (buff);
+	if (nb / 10)
+		ft_char(nb / 10, str, i + 1);
+	str[i] = '0' + nb % 10;
 }
 
-size_t	len_int(long n, size_t len)
+static void	ft_rev_str(char	*str, int lenght)
 {
-	while (n > 9)
+	int	i;
+	int	temp;
+
+	i = 0;
+	while (i < (lenght / 2))
 	{
-		n /= 10;
-		len++;
+		temp = str[i];
+		str[i] = str[lenght - i - 1];
+		str[lenght - i - 1] = temp;
+		i++;
 	}
-	len++;
-	return (len);
+}
+
+static char	*ft_strcpy(char *dest, char *src)
+{
+	int		size;
+
+	size = 0;
+	while (*(src + size) != '\0')
+	{
+		*(dest + size) = *(src + size);
+		++size;
+	}
+	dest[size] = '\0';
+	return (dest);
+}
+
+static int	n_len(int n, int i)
+{
+	if (n / 10)
+		return (n_len (n / 10, ++i));
+	if (!(n / 10))
+		return (++i);
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	char		*buff;
-	size_t		len;
-	size_t		neg;
-	long		nb;
+	char	*s;
+	int		len;
+	int		sign;
 
-	neg = 0;
-	len = 0;
-	nb = (long)n;
-	if (nb < 0)
+	sign = 0;
+	if (n < 0)
 	{
-		neg = 1;
-		nb *= -1;
+		n *= -1;
+		sign = -1;
 	}
-	len = len_int(nb, len);
-	buff = malloc((len + 1 + neg) * sizeof(char));
-	if (!buff)
+	len = n_len(n, 0);
+	s = (char *)malloc((len + 1 + ((sign - 1) * -1 - 1)) * sizeof(char));
+	if (!s)
 		return (0);
-	buff = ft_fill_char(buff, len, nb, neg);
-	return (buff);
+	if (n == -2147483648)
+		return (ft_strcpy(s, "-2147483648"));
+	ft_char(n, s, 0);
+	if (sign < 0)
+		s[len] = '-';
+	s[len - sign] = 0;
+	ft_rev_str(s, len - sign);
+	return (s);
 }

@@ -3,38 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 18:21:45 by eperaita          #+#    #+#             */
-/*   Updated: 2021/08/06 13:18:10 by eperaita         ###   ########.fr       */
+/*   Created: 2021/06/03 13:00:00 by jofernan          #+#    #+#             */
+/*   Updated: 2021/06/03 13:00:01 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
-	size_t	end;
-	char	*p;
+	char	*ptr;
 
-	i = 0;
 	if (!s1 || !set)
 		return (0);
-	end = ft_strlen(s1);
-	while (s1[i])
-	{
-		if (ft_strchr(set, s1[i]))
-			i++;
-		else
-			break ;
-	}
-	while (end > i)
-	{
-		if (ft_strchr(set, s1[end - 1]))
-			end--;
-		else
-			break ;
-	}
-	p = ft_substr(s1, i, end - i);
-	return (p);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	i = ft_strlen(s1);
+	while (i && ft_strchr(set, s1[i]))
+		i--;
+	ptr = ft_substr((char *)s1, 0, i + 1);
+	return (ptr);
 }

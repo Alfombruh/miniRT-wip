@@ -3,32 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/16 09:29:17 by eperaita          #+#    #+#             */
-/*   Updated: 2021/08/16 14:56:52 by eperaita         ###   ########.fr       */
+/*   Created: 2021/06/04 12:24:03 by jofernan          #+#    #+#             */
+/*   Updated: 2021/06/04 12:24:04 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *),	void (*del)(void *))
+t_list	*ft_lstmap(t_list	*lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*head;
-	t_list	*to_add;
+	t_list	*new_list;
+	t_list	*next_old;
+	t_list	*next_new;
 
-	if (!lst || !f)
-		return (0);
-	head = NULL;
-	while (lst)
+	if (!lst)
+		return (NULL);
+	new_list = ft_lstnew((*f)(lst->content));
+	if (!new_list)
+		return (NULL);
+	next_new = new_list;
+	next_old = lst->next;
+	while (1)
 	{
-		to_add = ft_lstnew((*f)(lst->content));
-		if (!to_add)
+		if (next_old == NULL)
+			break ;
+		next_new->next = ft_lstnew((*f)(next_old->content));
+		if (!next_new)
 		{
-			ft_lstclear(&head, del);
-			return (0);
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		ft_lstadd_back(&head, to_add);
-		lst = lst->next;
+		next_new = next_new->next;
+		next_old = next_old->next;
 	}
-	return (head);
+	return (new_list);
 }
