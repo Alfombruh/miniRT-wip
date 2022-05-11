@@ -34,7 +34,7 @@ int mlx_start(t_rt *rt)
 	ft_memset(&mlx, 0, sizeof(mlx));
 	mlx.rt = rt;
 	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "#def AUL_T");
+	mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "#M1 CuC0");
 	mlx_img(&mlx);
 	start_raytrace(rt, &mlx, &mlx.img); //funcion que empiza con RTX
 	mlx_hook(mlx.win, 2, 1L<<0, close_win, &mlx);

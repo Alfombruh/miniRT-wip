@@ -1,19 +1,26 @@
 #include "../../includes/minirt.h"
 #include <math.h>
+#include <stdio.h>
 
-static int infinite_cylinder(t_cy *cy, t_rt *rt)
-{
-	
-}
 // https://www.youtube.com/watch?v=UTz7ytMJ2yk
-// really cool RTX in cpp series
+// really cool RT in cpp series
+// http://www.irisa.fr/prive/kadi/Master_Recherche/cours_CTR/RayTracing.pdf
+// those are some slides about raytracing
 double	cylinder_intersection(t_cy *cy, t_vec ray, t_rt *rt)
 {
-	(void) ray;
-	t_vec	top;
-	
-	top = v_add(cy->coord, v_scal(cy->n, cy->h));
-	if (infinite_cylinder(cy, rt))
+	double A;
+	double B;
+	double C;
+	double dis;
+
+	if (v_dot(ray, cy->n) < 0.0001)
 		return (-1);
-	return (0);
+	A = pow(ray.x, 2) + pow(ray.y, 2);
+	B = 2 * (rt->cam.coord.x + ray.x) + (2 * (rt->cam.coord.y + ray.y));
+	C = pow(rt->cam.coord.x, 2) + pow(rt->cam.coord.y, 2) - pow(cy->d / 2.0, 2);
+	dis = pow(B, 2) - (4.0 * A * C);
+	if (dis < 0)
+		return (-1);
+	else 
+		return (1);
 }
