@@ -33,9 +33,9 @@ int get_coord(char *pos, t_vec *vec)
 	temp = ft_split(pos, ',');
 	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
 		return (1);
-	vec->x = ft_atoi(temp[0]);
-	vec->y = ft_atoi(temp[1]);
-	vec->z = ft_atoi(temp[2]);
+	vec->x = ft_atod(temp[0]);
+	vec->y = ft_atod(temp[1]);
+	vec->z = ft_atod(temp[2]);
 	free_double(temp);
 	return (0);
 }
@@ -48,15 +48,11 @@ int get_vector(char *pos, t_vec *vec)
 	temp = ft_split(pos, ',');
 	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
 		return (1);
-	vec->x = ft_atoi(temp[0]);
-	vec->y = ft_atoi(temp[1]);
-	vec->z = ft_atoi(temp[2]);
+	vec->x = ft_atod(temp[0]);
+	vec->y = ft_atod(temp[1]);
+	vec->z = ft_atod(temp[2]);
 	free_double(temp);
-	if (vec->x != -1 && vec->x != 1 && vec->x != 0)
-		return (1);
-	if (vec->y != -1 && vec->y != 1 && vec->y != 0)
-		return (1);
-	if (vec->z != -1 && vec->z != 1 && vec->z != 0)
-		return (1);
+	if (v_mod(v_normalize(*vec)) != 1)
+		return (-1);
 	return (0);
 }

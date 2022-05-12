@@ -4,12 +4,18 @@
 
 //https://www.youtube.com/watch?v=ggHSrlrP5zI 
 //a quick video about cameras in a raytracer
+//This function makes a matrix thas is gonna be used to transform the cam rays so we can move our cam
 static void	cam_to_origin(t_matrix *cam, t_rt *rt)
 {
 	t_vec	up;
 	t_vec	right;
+	t_vec	lol;
 
-	right = v_normalize(v_cross(rt->cam.n, v_new(0,1,0)));
+	if (rt->cam.n.x == 0 && (rt->cam.n.y == 1 || rt->cam.n.y == -1) && rt->cam.n.z == 0)
+			lol = v_new(1,0,0);
+	else
+			lol = v_new(0,1,0);
+	right = v_normalize(v_cross(lol, rt->cam.n));
 	up = v_cross(rt->cam.n, right);
 	cam->m[0][0] = right.x;
 	cam->m[0][1] = right.y;
@@ -38,7 +44,7 @@ static t_vec place_ray(t_rt *rt, double i, double j)
 	a_ratio = (double) WIDTH / (double) HEIGHT;
 	x = (2.0 * ((i + 0.5) / (double) WIDTH) - 1.0) * a_ratio * tan((rt->cam.FOV / 2.0) * (M_PI / 180.0));
 	y = (1.0 - (2.0 * (j + 0.5) / (double) HEIGHT)) *  tan((rt->cam.FOV / 2.0) * (M_PI / 180.0));
-	return (v_new(x, y, -1)); //orientamos la camara hacia z en -1 por convencion
+	return (v_new(-x, y, 1)); //orientamos la camara hacia z en 1 por convencion
 }
 
 static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
@@ -47,10 +53,9 @@ static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
 	double	dist;
 	double	catched;
 
-	ray = v_normalize(ray);
-
 	dist = 0;
 	catched = INFINITY;
+	ray = v_normalize(ray);
 	node = (void *)rt->sph;
 	while (rt->sph)
 	{
@@ -91,6 +96,16 @@ static t_vec ray_casting(t_rt *rt, t_vec ray, int *color)
 	return ((t_vec) ray);
 }
 
+static t_vec ray_transform(t_rt *rt, t_vec ray)
+{
+	//printf("ray is x=%f y=%f z=%f\n", ray->x, ray->y, ray->z);
+	ray = matrix_vector(rt->m_cam, ray);
+	//printf("ray is x=%f y=%f z=%f\n", ray->x, ray->y, ray->z);
+	ray = v_sub(ray, rt->cam.coord);
+	ray = v_normalize(ray);
+	return (ray);
+}
+
 int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img)
 {
 	int	i;
@@ -107,6 +122,7 @@ int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img)
 		while (++i < WIDTH)
 		{
 			ray = place_ray(rt, i, j);
+			ray = ray_transform(rt, ray);
 			ray_casting(rt, ray, &color);
 			img->addr[j * img->line_len + i] = color; 
 			color = 0;

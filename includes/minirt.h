@@ -49,12 +49,6 @@ typedef struct s_matrix
 	double m[4][4];
 }	t_matrix;
 
-typedef struct s_ray
-{
-	t_vec	r;
-	t_vec	o;
-}	t_ray;
-
 typedef struct s_rt
 {	
 	t_alight	alight;
@@ -63,7 +57,6 @@ typedef struct s_rt
 	t_sph		*sph;
 	t_pl		*pl;
 	t_cy		*cy;
-	t_ray 		ray;//saves origin and dir of a ray, it is used in every pixel
 	t_matrix	m_cam;//matrix that represents cam
 } t_rt;
 
@@ -97,5 +90,7 @@ int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img);
 double sphere_intersection(t_sph *sph, t_vec ray, t_rt *rt);
 double cylinder_intersection(t_cy *cy, t_vec ray, t_rt *rt);
 double plane_intersection(t_pl *pl, t_vec ray, t_rt *rt);
+
+t_vec	matrix_vector(t_matrix m, t_vec ray);
 
 #endif

@@ -2,7 +2,7 @@
 
 int element_ambient_light(char **v, t_rt *rt)
 {
-	if (v[2] && !v[3])
+	if (v[0] && v[1] && v[2] && !v[3])
 	{
 		rt->alight.ratio = ft_atod(v[1]);
 		if (get_trgb(v[2], &rt->alight.tRGB))
@@ -12,10 +12,9 @@ int element_ambient_light(char **v, t_rt *rt)
 		return (1);
 	return (0);
 }
-
 int element_camera(char **v, t_rt *rt)
 {
-	if (v[3] && !v[4])
+	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
 		if (get_coord(v[1], &rt->cam.coord))
 			return (1);
@@ -32,7 +31,7 @@ int element_camera(char **v, t_rt *rt)
 
 int element_light(char **v, t_rt *rt)
 {
-	if (v[3] && !v[4])
+	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
 		get_coord(v[1], &rt->light.coord);//preguntar si devuelve 1
 		rt->light.ratio = ft_atod(v[2]);

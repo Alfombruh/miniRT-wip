@@ -5,7 +5,7 @@ int element_sphere(char **v, t_rt *rt)
 	t_sph	*temp;
 	t_sph	*head;
 	
-	if (v[3] && !v[4])
+	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
 		temp = (t_sph *)malloc(sizeof(t_sph));
 		if (!rt->sph)
@@ -39,7 +39,7 @@ int element_plane(char **v, t_rt *rt)
 	t_pl *temp;
 	t_pl *head;
 
-	if (v[3] && !v[4])
+	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
 		temp = (t_pl *)malloc(sizeof(t_pl));
 		if (!rt->pl)
@@ -74,7 +74,7 @@ int element_cylinder(char **v, t_rt *rt)
 	t_cy 	*temp;
 	t_cy	*head;
 
-	if (v[5] && !v[6])
+	if (v[0] && v[1] && v[2] && v[3] && v[4] && v[5] && !v[6])
 	{
 		temp = (t_cy *)malloc(sizeof(t_cy));
 		if (!rt->cy)

@@ -15,6 +15,7 @@ FILES = srcs/main	\
 		srcs/utils/elements_linked \
 		srcs/utils/mlx_start \
 		srcs/utils/ray_trace \
+		srcs/utils/matrix_vector \
 		srcs/utils/plane_intersection \
 		srcs/utils/sphere_intersection \
 		srcs/utils/cylinder_intersection 

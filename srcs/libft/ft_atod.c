@@ -1,6 +1,6 @@
 #include "libft.h"
 
-static void get_int(char *str, double *number, double *neg)
+static char *get_int(char *str, double *number, double *neg)
 {
 	if (*str == '-' || *str == '+')
 	{
@@ -13,6 +13,7 @@ static void get_int(char *str, double *number, double *neg)
 		*number = *number * 10 + (*str - 48);
 		str++;
 	}
+	return (str);
 }
 
 double ft_atod(char *str)
@@ -26,12 +27,12 @@ double ft_atod(char *str)
 	number = 0;
 	if (!str)
 		return (0);
-	get_int(str, &number, &neg);
+	str = get_int(str, &number, &neg);
 	if (*str == '.')
 		str++;
 	else
 		return (number * neg);
-	while (*str && (*str <= '0' && *str >= '9'))
+	while (*str && (*str >= '0' && *str <= '9'))
 	{
 		number += (*str - 48) / den;
 		den *= 10;

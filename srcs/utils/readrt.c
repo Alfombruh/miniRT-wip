@@ -14,7 +14,6 @@ static void print_elements(t_rt *rt)
 		templ = rt->pl;
 	if (rt->cy)
 		tempcy = rt->cy;
-
 	if (rt->alight.ratio)
 	{
 		printf(BHGRN "Ambien Light Ratio==%f\n", rt->alight.ratio);
@@ -91,6 +90,8 @@ static int fill_struct(char **values, t_rt *rt)
 		i = element_plane(values, rt);
 	else if (!ft_strncmp(values[0], "cy", 2))
 		i =	element_cylinder(values, rt);
+	else if (!ft_strncmp(values[0], "\n", 1))
+		return (0);
 	else
 		return (1);
 	return (i);
