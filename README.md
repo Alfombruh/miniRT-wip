@@ -2,9 +2,8 @@
 /////MUST DO//////
 
 - cylinder intersection aswell as other shape(perhaps a triangle)
-- camera to origin
+- ray tracing
 
 /////SOON TO COME////////
 
-- ray tracing
 - norminette

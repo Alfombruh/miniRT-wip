@@ -11,7 +11,7 @@ static void double_swap(double *i, double *j)
 	*j = temp;
 }
 	
-double sphere_intersection(t_sph *sph, t_vec ray, t_rt *rt)
+double sphere_intersection(t_sph *sph, t_vec ray, t_vec coord)
 {
 	t_vec	l;
 	double	tca;
@@ -21,7 +21,7 @@ double sphere_intersection(t_sph *sph, t_vec ray, t_rt *rt)
 	double	dd;
 	double	r = sph->d / 2;
 
-	l = v_sub(sph->coord, rt->cam.coord) ;
+	l = v_sub(sph->coord, coord) ;
 	tca = v_dot(l, ray);
 	if (tca < 0)
 		return (-1);

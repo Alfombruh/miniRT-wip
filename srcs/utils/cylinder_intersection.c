@@ -6,7 +6,7 @@
 // really cool RT in cpp series
 // http://www.irisa.fr/prive/kadi/Master_Recherche/cours_CTR/RayTracing.pdf
 // those are some slides about raytracing
-double	cylinder_intersection(t_cy *cy, t_vec ray, t_rt *rt)
+double	cylinder_intersection(t_cy *cy, t_vec ray, t_vec coord)
 {
 	double A;
 	double B;
@@ -16,8 +16,8 @@ double	cylinder_intersection(t_cy *cy, t_vec ray, t_rt *rt)
 	if (v_dot(ray, cy->n) < 0.0001)
 		return (-1);
 	A = pow(ray.x, 2) + pow(ray.y, 2);
-	B = 2 * (rt->cam.coord.x + ray.x) + (2 * (rt->cam.coord.y + ray.y));
-	C = pow(rt->cam.coord.x, 2) + pow(rt->cam.coord.y, 2) - pow(cy->d / 2.0, 2);
+	B = 2 * (coord.x + ray.x) + (2 * (coord.y + ray.y));
+	C = pow(coord.x, 2) + pow(coord.y, 2) - pow(cy->d / 2.0, 2);
 	dis = pow(B, 2) - (4.0 * A * C);
 	if (dis < 0)
 		return (-1);

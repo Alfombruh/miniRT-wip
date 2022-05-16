@@ -27,6 +27,21 @@
 #include "elements.h"
 #include "vectors.h"
 
+typedef struct s_matrix
+{
+	double m[4][4];
+}	t_matrix;
+//an structure used to get the intersection of a ray and his values
+typedef struct s_inter
+{
+	t_pl	*pl;
+	t_cy	*cy;
+	t_sph	*sph;
+	int		type;
+	int		dist;
+	int		color;
+}			t_inter;
+
 typedef struct s_img
 {
 	void		*img;
@@ -44,11 +59,6 @@ typedef struct s_mlx
 	struct s_rt *rt;
 }	t_mlx;
 
-typedef struct s_matrix
-{
-	double m[4][4];
-}	t_matrix;
-
 typedef struct s_rt
 {	
 	t_alight	alight;
@@ -57,40 +67,47 @@ typedef struct s_rt
 	t_sph		*sph;
 	t_pl		*pl;
 	t_cy		*cy;
+	t_inter		inter;
 	t_matrix	m_cam;//matrix that represents cam
 } t_rt;
 
-//utils
-int ft_argc(void);
-int	ft_argvcheck(char *argv);
-int ft_error(char *s, t_rt *rt);
-
-int ft_readrt(char *argv, t_rt *rt);
-
-int element_ambient_light(char **s, t_rt *rt);
-int element_camera(char **s, t_rt *rt);
-int element_light(char **s, t_rt *rt);
-int element_sphere(char **s, t_rt *rt);
-int element_plane(char **s, t_rt *rt);
-int element_cylinder(char **s, t_rt *rt);
-
-int	get_trgb(char *color, int *tRGB);
-int get_coord(char *pos, t_vec *vec);
-int	get_vector(char *pos, t_vec *vec);
-int	color_add(int trgb1, int trgb2);
-
-int free_double(char **str);
-int free_struct(t_rt *rt);
-void free_pl(t_pl *pl);
-void free_sph(t_sph *sph);
-void free_cy(t_cy *cy);
-
-int mlx_start(t_rt *rt);
-int start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img);
-double sphere_intersection(t_sph *sph, t_vec ray, t_rt *rt);
-double cylinder_intersection(t_cy *cy, t_vec ray, t_rt *rt);
-double plane_intersection(t_pl *pl, t_vec ray, t_rt *rt);
-
+//IO handler//
+int		ft_argc(void);
+int		ft_argvcheck(char *argv);
+int		ft_error(char *s, t_rt *rt);
+int		ft_readrt(char *argv, t_rt *rt);
+//each elements fill function//
+int		element_ambient_light(char **s, t_rt *rt);
+int		element_camera(char **s, t_rt *rt);
+int		element_light(char **s, t_rt *rt);
+int		element_sphere(char **s, t_rt *rt);
+int		element_plane(char **s, t_rt *rt);
+int		element_cylinder(char **s, t_rt *rt);
+//utils//
+int		get_trgb(char *color, int *tRGB);
+int		get_coord(char *pos, t_vec *vec);
+int		get_vector(char *pos, t_vec *vec);
+int		color_add(int trgb1, int trgb2);
+//frees//
+int		free_double(char **str);
+int		free_struct(t_rt *rt);
+void	free_pl(t_pl *pl);
+void	free_sph(t_sph *sph);
+void	free_cy(t_cy *cy);
+//raytracing//
+int		mlx_start(t_rt *rt);
+int		start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img);
+void	ray_casting(t_rt *rt, t_vec ray);
+void 	ray_plane(double *dist, double *catched, t_rt *rt, t_vec ray);
+void 	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray);
+void 	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray);
+double	sphere_intersection(t_sph *sph, t_vec ray, t_vec coord);
+double	cylinder_intersection(t_cy *cy, t_vec ray, t_vec coord);
+double	plane_intersection(t_pl *pl, t_vec ray, t_vec coord);
+//camera//
+void	cam_to_origin(t_matrix *cam, t_rt *rt);
+t_vec	place_ray(t_rt *rt, double i, double j);
 t_vec	matrix_vector(t_matrix m, t_vec ray);
+t_vec	ray_transform(t_rt *rt, t_vec ray);
 
 #endif
