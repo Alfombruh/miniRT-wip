@@ -1,6 +1,6 @@
 #include "../../includes/minirt.h"
 
-static void trgb_rgb(int trgb, int rgb[3])
+void trgb_rgb(int trgb, int rgb[3])
 {
 	rgb[0] = (trgb >> 16) & 0xFF;
 	rgb[1] = (trgb >> 8) & 0xFF;

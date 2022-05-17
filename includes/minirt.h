@@ -88,6 +88,7 @@ int		get_trgb(char *color, int *tRGB);
 int		get_coord(char *pos, t_vec *vec);
 int		get_vector(char *pos, t_vec *vec);
 int		color_add(int trgb1, int trgb2);
+void	trgb_rgb(int trgb, int rgb[3]);
 //frees//
 int		free_double(char **str);
 int		free_struct(t_rt *rt);
