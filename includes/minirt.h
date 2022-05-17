@@ -105,6 +105,8 @@ void 	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray);
 double	sphere_intersection(t_sph *sph, t_vec ray, t_vec coord);
 double	cylinder_intersection(t_cy *cy, t_vec ray, t_vec coord);
 double	plane_intersection(t_pl *pl, t_vec ray, t_vec coord);
+int		amb_light(int amb_color, int obj_color, double ratio);
+int		diff_light(int obj, double l_ratio);
 //camera//
 void	cam_to_origin(t_matrix *cam, t_rt *rt);
 t_vec	place_ray(t_rt *rt, double i, double j);
