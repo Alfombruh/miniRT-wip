@@ -17,6 +17,7 @@ FILES = srcs/main	\
 		srcs/utils/ray_trace	\
 		srcs/utils/ray_cast		\
 		srcs/utils/camera	\
+		srcs/utils/lights   \
 		srcs/utils/plane_intersection	\
 		srcs/utils/sphere_intersection	\
 		srcs/utils/cylinder_intersection 

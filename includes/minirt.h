@@ -31,6 +31,15 @@ typedef struct s_matrix
 {
 	double m[4][4];
 }	t_matrix;
+
+typedef struct s_shame
+{
+	t_vec	hp;
+	t_vec	n_light;
+	double	mod;
+	int		asd;
+}	t_shame;
+
 //an structure used to get the intersection of a ray and his values
 typedef struct s_inter
 {
@@ -61,6 +70,7 @@ typedef struct s_mlx
 
 typedef struct s_rt
 {	
+	int			color;
 	t_alight	alight;
 	t_cam		cam;
 	t_light		light;
@@ -88,6 +98,7 @@ int		get_trgb(char *color, int *tRGB);
 int		get_coord(char *pos, t_vec *vec);
 int		get_vector(char *pos, t_vec *vec);
 int		color_add(int trgb1, int trgb2);
+int		color_scal(int trgb, double i);
 void	trgb_rgb(int trgb, int rgb[3]);
 //frees//
 int		free_double(char **str);
@@ -99,14 +110,12 @@ void	free_cy(t_cy *cy);
 int		mlx_start(t_rt *rt);
 int		start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img);
 void	ray_casting(t_rt *rt, t_vec ray);
-void 	ray_plane(double *dist, double *catched, t_rt *rt, t_vec ray);
-void 	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray);
-void 	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray);
 double	sphere_intersection(t_sph *sph, t_vec ray, t_vec coord);
 double	cylinder_intersection(t_cy *cy, t_vec ray, t_vec coord);
 double	plane_intersection(t_pl *pl, t_vec ray, t_vec coord);
 int		amb_light(int amb_color, int obj_color, double ratio);
 int		diff_light(int obj, double l_ratio);
+int		light_intersection(t_rt *rt, t_vec light);
 //camera//
 void	cam_to_origin(t_matrix *cam, t_rt *rt);
 t_vec	place_ray(t_rt *rt, double i, double j);
