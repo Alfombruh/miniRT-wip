@@ -9,7 +9,7 @@ static t_vec object_normal(t_inter inter, t_vec hp)
 	else if (inter.type == 2)
 		return (inter.pl->n);
 	else if (inter.type == 3)
-		return (v_new(0,0,0));
+		return (inter.cy->n);
 	else
 		return (v_new(0,0,0));
 }
@@ -29,7 +29,7 @@ static void	ray_tracing(t_rt *rt, t_vec ray)
 		return ;
 	vl = v_normalize(v_sub(rt->light.coord, hp));
 	amb_color = amb_light(rt->alight.tRGB, rt->inter.color, rt->alight.ratio);
-	ls = rt->light.ratio * v_dot(n, v_normalize(v_sub(rt->light.coord, hp)));
+	ls = rt->light.ratio * v_dot(n, vl);
 	if (ls < 0.0)
 		ls = 0;
 	else

@@ -25,6 +25,8 @@ pl 20,20,20 0,1,0 225,225,225 (pl is the Plane, the  first parameter are the coo
 cy 20,20,50 0,1,0 10.6 21.2 150,20,70 (cy is the Cylinder element, it has coords as its first parameter, normal vector as his second one, diameter has his third one, then height and at last the color)
 
 
+-You can mute a line by adding # at the start of the line.
+
 -You can separate each line by the amount of \n you want and you can also  separate each elements parameter by spaces to make it more readable. It's UP2U
 
 

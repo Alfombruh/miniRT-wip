@@ -92,6 +92,8 @@ static int fill_struct(char **values, t_rt *rt)
 		i =	element_cylinder(values, rt);
 	else if (!ft_strncmp(values[0], "\n", 1))
 		return (0);
+	else if (!ft_strncmp(values[0], "#", 1))
+		return (0);
 	else
 		return (1);
 	return (i);
