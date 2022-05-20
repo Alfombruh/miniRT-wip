@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:11 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:55:19 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <stdio.h>
 
-int ft_argvcheck(char *argv)
+int	ft_argvcheck(char *argv)
 {
 	char	*s;
 
@@ -25,7 +37,7 @@ int	ft_argc(void)
 	return (1);
 }
 
-int ft_error(char *s, t_rt *rt)
+int	ft_error(char *s, t_rt *rt)
 {
 	printf(BHRED "Error\n%s\n" CLOSE, s);
 	if (rt)

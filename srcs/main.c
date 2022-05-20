@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:42 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:40:29 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_rt rt;
+	t_rt	rt;
 
 	if (argc != 2)
 		return (ft_argc());

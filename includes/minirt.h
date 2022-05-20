@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:37:56 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:38:08 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
-#define MINIRT_H
+# define MINIRT_H
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -22,14 +34,14 @@
 # define BHWHT "\e[1;97m"
 //color reference-> "https://www.theurbanpenguin.com/4184-2/"
 
-#include "mlx.h"
-#include "libft.h"
-#include "elements.h"
-#include "vectors.h"
+# include "mlx.h"
+# include "libft.h"
+# include "elements.h"
+# include "vectors.h"
 
 typedef struct s_matrix
 {
-	double m[4][4];
+	double	m[4][4];
 }	t_matrix;
 
 typedef struct s_shame
@@ -58,15 +70,15 @@ typedef struct s_img
 	int			bpp;
 	int			line_len;
 	int			endian;
-} 				t_img;
+}				t_img;
 
 typedef struct s_mlx
 {
 	void		*mlx;
 	void		*win;
-	t_img 		img;
-	struct s_rt *rt;
-}	t_mlx;
+	t_img		img;
+	struct s_rt	*rt;
+}				t_mlx;
 
 typedef struct s_rt
 {	
@@ -78,8 +90,8 @@ typedef struct s_rt
 	t_pl		*pl;
 	t_cy		*cy;
 	t_inter		inter;
-	t_matrix	m_cam;//matrix that represents cam
-} t_rt;
+	t_matrix	m_cam;
+}				t_rt;
 
 //IO handler//
 int		ft_argc(void);

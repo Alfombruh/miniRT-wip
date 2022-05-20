@@ -1,38 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lights.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:15 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:57:13 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <math.h>
 
-static int light_sphere(t_rt *rt, t_vec light, double *dist, t_shame sh)
+static int	light_sphere(t_rt *rt, t_vec light, double *dist, t_shame sh)
 {
 	t_sph	*temp;
 
 	temp = rt->sph;
-	while(rt->sph)
+	while (rt->sph)
 	{
 		*dist = sphere_intersection(rt->sph, sh.n_light, light);
-//		if ((*dist > -0.99999999 && *dist < sh.mod) || fabs(*dist - sh.mod) > 0.000000001)
-//		{
-//			rt->sph = temp;
-//			return (0);
-//		}
+		if ((*dist > -0.9999999 && *dist < sh.mod)
+			|| fabs(*dist - sh.mod) < 0.00000001)
+		{
+			rt->sph = temp;
+			return (0);
+		}
 		rt->sph = rt->sph->next;
 	}
 	rt->sph = temp;
 	return (1);
 }
 
-static int light_plane(t_rt *rt, t_vec light, double *dist, t_shame sh)
+static int	light_plane(t_rt *rt, t_vec light, double *dist, t_shame sh)
 {
 	t_pl	*temp;
 
 	temp = rt->pl;
-	while(rt->pl)
+	while (rt->pl)
 	{
 		*dist = plane_intersection(rt->pl, sh.n_light, light);
-//		if ((*dist > -0.99999999 && *dist < sh.mod) || fabs(*dist - sh.mod) > 0.000000001)
-//		{
-//			rt->pl = temp;
-//			return (0);
-//		}
+		if ((*dist > -0.9999999 && *dist < sh.mod)
+			|| fabs(*dist - sh.mod) < 0.00000001)
+		{
+			rt->pl = temp;
+			return (0);
+		}
 		rt->pl = rt->pl->next;
 	}
 	rt->pl = temp;
@@ -54,7 +68,8 @@ static void light_cylinder(t_rt *rt, t_vec light, double *dist, double mod)
 	rt->cy = temp;
 }
 */
-int light_intersection(t_rt *rt, t_vec light)
+
+int	light_intersection(t_rt *rt, t_vec light)
 {
 	double	dist;
 	t_shame	sh;
@@ -63,17 +78,9 @@ int light_intersection(t_rt *rt, t_vec light)
 	ft_memset(&sh, 0, sizeof(sh));
 	sh.mod = v_mod(v_sub(rt->light.coord, light));
 	sh.n_light = v_normalize(v_sub(rt->light.coord, light));
-	light_sphere(rt, light, &dist, sh);
-	light_plane(rt, light, &dist, sh);
-	if ((dist > -0.99999999 && dist < sh.mod) || fabs(dist - sh.mod) > 0.000000001)
-		return (1);
-	return (0);
-	/*
 	if (light_sphere(rt, light, &dist, sh) == 0)
 		return (0);
 	if (light_plane(rt, light, &dist, sh) == 0)
 		return (0);
-//	light_cylinder(rt, light, &dist, mod);
-	return (1);*/
+	return (1);
 }
-

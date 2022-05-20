@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   readrt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:34 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:54:53 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <fcntl.h>
 #include <stdio.h>
@@ -71,9 +83,9 @@ static void print_elements(t_rt *rt)
 	rt->cy = tempcy;
 }
 
-static int fill_struct(char **values, t_rt *rt)
+static int	fill_struct(char **values, t_rt *rt)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!values[0])
@@ -89,7 +101,7 @@ static int fill_struct(char **values, t_rt *rt)
 	else if (!ft_strncmp(values[0], "pl", 2))
 		i = element_plane(values, rt);
 	else if (!ft_strncmp(values[0], "cy", 2))
-		i =	element_cylinder(values, rt);
+		i = element_cylinder(values, rt);
 	else if (!ft_strncmp(values[0], "\n", 1))
 		return (0);
 	else if (!ft_strncmp(values[0], "#", 1))
@@ -99,29 +111,29 @@ static int fill_struct(char **values, t_rt *rt)
 	return (i);
 }
 
-static int get_values(char *line, t_rt *rt)
+static int	get_values(char *line, t_rt *rt)
 {
-	char **values;
-	int i = -1;
+	char	**values;
+	int		i;
 
-	(void) rt;
+	i = -1;
 	values = ft_split(line, ' ');
 	if (fill_struct(values, rt))
 		return (1);
 	while (values[++i])
 		free(values[i]);
 	free(values);
-	return(0);
+	return (0);
 }
 
-int ft_readrt(char *argv, t_rt *rt)
+int	ft_readrt(char *argv, t_rt *rt)
 {
 	int		fd;
 	char	*s;
 
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
-		return(1);
+		return (1);
 	s = get_next_line(fd);
 	while (s)
 	{

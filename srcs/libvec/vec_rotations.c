@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vec_rotations.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:38:46 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/21 00:16:08 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vectors.h"
 #include <math.h>
 
-t_vec v_rotatex(t_vec v, double a)
+t_vec	v_rotatex(t_vec v, double a)
 {
-	t_vec w;
-	
+	t_vec	w;
+
 	a *= M_PI / 180.0;
 	w.x = v.x * 1.0 + v.y * 0.0 + v.z * 0.0;
 	w.y = v.x * 0.0 + v.y * cos(a) + v.z * (sin(a) * (-1.0));
@@ -12,10 +24,10 @@ t_vec v_rotatex(t_vec v, double a)
 	return (w);
 }
 
-t_vec v_rotatey(t_vec v, double a)
+t_vec	v_rotatey(t_vec v, double a)
 {
-	t_vec w;
-	
+	t_vec	w;
+
 	a *= M_PI / 180.0;
 	w.x = v.x * cos(a) + v.y * 0.0 + v.z * sin(a);
 	w.y = v.x * 0.0 + v.y * 1.0 + v.z * 0.0;
@@ -23,9 +35,9 @@ t_vec v_rotatey(t_vec v, double a)
 	return (w);
 }
 
-t_vec v_rotatez(t_vec v, double a)
+t_vec	v_rotatez(t_vec v, double a)
 {
-	t_vec w;
+	t_vec	w;
 
 	a *= M_PI / 180.0;
 	w.x = v.x * cos(a) + v.y * (sin(a) * (-1.0)) + v.z * 0.0;

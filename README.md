@@ -1,11 +1,7 @@
-
-/////MUST DO//////
+/////MUST FINISH//////
 
 - cylinder intersection aswell as other shape(perhaps a triangle)
-- ray tracing
-
-/////SOON TO COME////////
-
+- fix raytracing
 - norminette
 
 /////MINIRT/////

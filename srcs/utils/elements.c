@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   elements.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:09 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:45:24 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <math.h>
 
-int element_ambient_light(char **v, t_rt *rt)
+int	element_ambient_light(char **v, t_rt *rt)
 {
 	if (v[0] && v[1] && v[2] && !v[3])
 	{
@@ -13,7 +25,8 @@ int element_ambient_light(char **v, t_rt *rt)
 		return (1);
 	return (0);
 }
-int element_camera(char **v, t_rt *rt)
+
+int	element_camera(char **v, t_rt *rt)
 {
 	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
@@ -38,16 +51,14 @@ int element_camera(char **v, t_rt *rt)
 	return (0);
 }
 
-int element_light(char **v, t_rt *rt)
+int	element_light(char **v, t_rt *rt)
 {
 	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
-		get_coord(v[1], &rt->light.coord);//preguntar si devuelve 1
+		get_coord(v[1], &rt->light.coord);
 		rt->light.ratio = ft_atod(v[2]);
-		// BONUS get_trgb(v[3], &rt->light.tRGB);//preguntar si devuelve 1
 	}
 	else
 		return (1);
 	return (0);
 }
-

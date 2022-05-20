@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_cast.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:28 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:40:38 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <math.h>
 
-static void 	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray)
+static void	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray)
 {
-	t_sph *temp;
+	t_sph	*temp;
 
 	temp = rt->sph;
-	while(rt->sph)
+	while (rt->sph)
 	{
 		*dist = sphere_intersection(rt->sph, ray, rt->cam.coord);
-		if (*dist < *catched && *dist > 0 && *dist < 1000) // si esta mas cerca que el anterior objeto y si el rayo intersecta
+		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
 			rt->inter.color = rt->sph->tRGB;
@@ -22,15 +34,15 @@ static void 	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray)
 	rt->sph = temp;
 }
 
-static void 	ray_plane(double *dist, double *catched, t_rt *rt, t_vec ray)
+static void	ray_plane(double *dist, double *catched, t_rt *rt, t_vec ray)
 {
-	t_pl *temp;
+	t_pl	*temp;
 
 	temp = rt->pl;
-	while(rt->pl)
+	while (rt->pl)
 	{
 		*dist = plane_intersection(rt->pl, ray, rt->cam.coord);
-		if (*dist < *catched && *dist > 0 && *dist < 1000) // si esta mas cerca que el anterior objeto y si el rayo intersecta
+		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
 			rt->inter.color = rt->pl->tRGB;
@@ -43,15 +55,15 @@ static void 	ray_plane(double *dist, double *catched, t_rt *rt, t_vec ray)
 	rt->pl = temp;
 }
 
-static void 	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray)
+static void	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray)
 {
-	t_cy *temp;
+	t_cy	*temp;
 
 	temp = rt->cy;
-	while(rt->cy)
+	while (rt->cy)
 	{
 		*dist = cylinder_intersection(rt->cy, ray, rt->cam.coord);
-		if (*dist < *catched && *dist > 0 && *dist < 1000) // si esta mas cerca que el anterior objeto y si el rayo intersecta
+		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
 			rt->inter.color = rt->cy->tRGB;
@@ -64,7 +76,7 @@ static void 	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray)
 	rt->cy = temp;
 }
 
-void ray_casting(t_rt *rt, t_vec ray)
+void	ray_casting(t_rt *rt, t_vec ray)
 {
 	double	dist;
 	double	catched;

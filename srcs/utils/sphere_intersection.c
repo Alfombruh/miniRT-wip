@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere_intersection.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:37 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:49:06 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <math.h>
 #include <stdio.h>
 
-static void double_swap(double *i, double *j)
+static void	double_swap(double *i, double *j)
 {
-	double temp;
-	
+	double	temp;
+
 	temp = *i;
 	*i = *j;
 	*j = temp;
 }
-	
-double sphere_intersection(t_sph *sph, t_vec ray, t_vec coord)
+
+double	sphere_intersection(t_sph *sph, t_vec ray, t_vec coord)
 {
 	t_vec	l;
 	double	tca;
@@ -19,8 +31,9 @@ double sphere_intersection(t_sph *sph, t_vec ray, t_vec coord)
 	double	t0;
 	double	t1;
 	double	dd;
-	double	r = sph->d / 2;
-
+	double	r;
+	
+	r = sph->d / 2;
 	l = v_sub(sph->coord, coord) ;
 	tca = v_dot(l, ray);
 	if (tca < 0)
@@ -35,9 +48,9 @@ double sphere_intersection(t_sph *sph, t_vec ray, t_vec coord)
 		double_swap(&t0, &t1);
 	if (t0 < 0)
 	{
-		t0 = t1;//if  t0 is negative we use t1 instead
+		t0 = t1;
 		if (t0 < 0)
-			return (-1); //this means that both t0 and t1 are negative
+			return (-1);
 	}
 	return (t0);
 }

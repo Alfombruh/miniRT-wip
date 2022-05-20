@@ -1,24 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   frees.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:13 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/21 00:02:28 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <stdlib.h>
 
-int free_double(char **str)
+int	free_double(char **str)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 		free(str[i]);
 	free(str);
 	return (1);
 }
 
-void free_cy(t_cy *cy)
+void	free_cy(t_cy *cy)
 {
-	t_cy *temp;
+	t_cy	*temp;
 
 	if (!cy)
 		return ;
-	while(cy->next)
+	while (cy->next)
 	{
 		temp = cy;
 		cy = cy->next;
@@ -27,13 +39,13 @@ void free_cy(t_cy *cy)
 	free(cy);
 }
 
-void free_sph(t_sph *sph)
+void	free_sph(t_sph *sph)
 {
-	t_sph *temp;
+	t_sph	*temp;
 
 	if (!sph)
 		return ;
-	while(sph->next)
+	while (sph->next)
 	{
 		temp = sph;
 		sph = sph->next;
@@ -42,13 +54,13 @@ void free_sph(t_sph *sph)
 	free(sph);
 }
 
-void free_pl(t_pl *pl)
+void	free_pl(t_pl *pl)
 {
-	t_pl *temp;
+	t_pl	*temp;
 
 	if (!pl)
 		return ;
-	while(pl->next)
+	while (pl->next)
 	{
 		temp = pl;
 		pl = pl->next;
@@ -56,7 +68,7 @@ void free_pl(t_pl *pl)
 	}
 }
 
-int free_struct(t_rt *rt)
+int	free_struct(t_rt *rt)
 {
 	free_pl(rt->pl);
 	free_sph(rt->sph);

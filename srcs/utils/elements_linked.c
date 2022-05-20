@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   elements_linked.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:06 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/21 00:08:14 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 
-int element_sphere(char **v, t_rt *rt)
+int	element_sphere(char **v, t_rt *rt)
 {
 	t_sph	*temp;
 	t_sph	*head;
-	
+
 	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
 		temp = (t_sph *)malloc(sizeof(t_sph));
@@ -34,10 +46,10 @@ int element_sphere(char **v, t_rt *rt)
 	return (0);
 }
 
-int element_plane(char **v, t_rt *rt)
+int	element_plane(char **v, t_rt *rt)
 {
-	t_pl *temp;
-	t_pl *head;
+	t_pl	*temp;
+	t_pl	*head;
 
 	if (v[0] && v[1] && v[2] && v[3] && !v[4])
 	{
@@ -55,11 +67,8 @@ int element_plane(char **v, t_rt *rt)
 			rt->pl->next = temp;
 			rt->pl = rt->pl->next;
 		}
-		if (get_coord(v[1], &rt->pl->coord))
-			return (1);
-		if (get_vector(v[2], &rt->pl->n))
-			return (1);
-		if (get_trgb(v[3], &rt->pl->tRGB))
+		if (get_coord(v[1], &rt->pl->coord) || get_vector(v[2], &rt->pl->n) 
+				|| get_trgb(v[3], &rt->pl->tRGB))
 			return (1);
 		rt->pl->next = NULL;
 		rt->pl = head;
@@ -69,9 +78,9 @@ int element_plane(char **v, t_rt *rt)
 	return (0);
 }
 
-int element_cylinder(char **v, t_rt *rt)
+int	element_cylinder(char **v, t_rt *rt)
 {
-	t_cy 	*temp;
+	t_cy	*temp;
 	t_cy	*head;
 
 	if (v[0] && v[1] && v[2] && v[3] && v[4] && v[5] && !v[6])

@@ -1,19 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   values.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:39:39 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/20 23:49:09 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 #include <stdio.h>
-
 
 ////////////////////////COLOR//////////////////////////
 int	get_trgb(char *color, int *tRGB)
 {
-	char **temp;
-	int rgb[3];
-	int i;
-	
-	temp = ft_split(color, ','); 
+	char	**temp;
+	int		rgb[3];
+	int		i;
+
+	temp = ft_split(color, ',');
 	if (temp[3] || !temp[1] || !temp[2] || !temp[0] || temp[2][0] == '\n')
 		return (1);
 	i = -1;
-	while(temp[++i])
+	while (temp[++i])
 	{
 		rgb[i] = ft_atoi(temp[i]);
 		if (rgb[i] < 0 || rgb[i] > 255)
@@ -24,11 +35,10 @@ int	get_trgb(char *color, int *tRGB)
 	return (0);
 }
 
-
 ////////////////////////VECTOR//////////////////////////
-int get_coord(char *pos, t_vec *vec)
+int	get_coord(char *pos, t_vec *vec)
 {
-	char **temp;
+	char	**temp;
 
 	temp = ft_split(pos, ',');
 	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
@@ -41,9 +51,9 @@ int get_coord(char *pos, t_vec *vec)
 }
 
 ////////////////////////VECTOR//////////////////////////
-int get_vector(char *pos, t_vec *vec)
+int	get_vector(char *pos, t_vec *vec)
 {
-	char **temp;
+	char	**temp;
 
 	temp = ft_split(pos, ',');
 	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
