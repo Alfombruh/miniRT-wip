@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:28 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/20 23:40:38 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/21 20:13:14 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray)
 	while (rt->sph)
 	{
 		*dist = sphere_intersection(rt->sph, ray, rt->cam.coord);
-		if (*dist < *catched && *dist > 0 && *dist < 1000)
+		if (*dist < *catched && *dist > 0 && *dist < 1000 && *dist != -1)
 		{
 			rt->inter.dist = *dist;
 			rt->inter.color = rt->sph->tRGB;

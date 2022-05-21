@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:15 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/20 23:57:13 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/21 20:16:28 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	light_sphere(t_rt *rt, t_vec light, double *dist, t_shame sh)
 	while (rt->sph)
 	{
 		*dist = sphere_intersection(rt->sph, sh.n_light, light);
-		if ((*dist > -0.9999999 && *dist < sh.mod)
+		if ((*dist > -0.99999999 && *dist < sh.mod)
 			|| fabs(*dist - sh.mod) < 0.00000001)
 		{
 			rt->sph = temp;
@@ -41,7 +41,7 @@ static int	light_plane(t_rt *rt, t_vec light, double *dist, t_shame sh)
 	while (rt->pl)
 	{
 		*dist = plane_intersection(rt->pl, sh.n_light, light);
-		if ((*dist > -0.9999999 && *dist < sh.mod)
+		if ((*dist > -0.99999999 && *dist < sh.mod)
 			|| fabs(*dist - sh.mod) < 0.00000001)
 		{
 			rt->pl = temp;
