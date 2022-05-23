@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:37:56 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/21 20:06:33 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:11:00 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_inter
 	t_cy	*cy;
 	t_sph	*sph;
 	int		type;
-	int		dist;
 	int		color;
+	double		dist;
 }			t_inter;
 
 typedef struct s_img

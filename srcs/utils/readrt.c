@@ -6,14 +6,14 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:34 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/20 23:54:53 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:31:55 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include <fcntl.h>
 #include <stdio.h>
-
+/*
 static void print_elements(t_rt *rt)
 {
 	int i = 1;
@@ -82,7 +82,7 @@ static void print_elements(t_rt *rt)
 	rt->pl = templ;
 	rt->cy = tempcy;
 }
-
+*/
 static int	fill_struct(char **values, t_rt *rt)
 {
 	int	i;
@@ -146,6 +146,6 @@ int	ft_readrt(char *argv, t_rt *rt)
 		s = get_next_line(fd);
 	}
 	free(s);
-	print_elements(rt);
+	//print_elements(rt);
 	return (0);
 }
