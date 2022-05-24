@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:30 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/24 04:52:12 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 06:38:00 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	ray_tracing(t_rt *rt, t_vec ray)
 	if (n.x == 0 && n.y == 0 && n.z == 0)
 		return (0);
 	vl = v_normalize(v_sub(rt->light.coord, hp));
-	color[0] = amb_light(rt->alight.tRGB, rt->inter.color, rt->alight.ratio);
+	color[0] = amb_light(rt->alight.trgb, rt->inter.color, rt->alight.ratio);
 	ls = rt->light.ratio * v_dot(n, v_normalize(v_sub(rt->light.coord, hp)));
 	if (ls < 0)
 		ls = 0;

@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:28 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/24 04:52:04 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 06:38:13 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray)
 		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
-			rt->inter.color = rt->sph->tRGB;
+			rt->inter.color = rt->sph->trgb;
 			rt->inter.sph = rt->sph;
 			rt->inter.type = 1;
 			*catched = *dist;
@@ -46,7 +46,7 @@ static void	ray_plane(double *dist, double *catched, t_rt *rt, t_vec ray)
 		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
-			rt->inter.color = rt->pl->tRGB;
+			rt->inter.color = rt->pl->trgb;
 			rt->inter.pl = rt->pl;
 			rt->inter.type = 2;
 			*catched = *dist;
@@ -67,7 +67,7 @@ static void	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray)
 		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
-			rt->inter.color = rt->cy->tRGB;
+			rt->inter.color = rt->cy->trgb;
 			rt->inter.cy = rt->cy;
 			rt->inter.type = 3;
 			*catched = *dist;

@@ -58,4 +58,7 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+nor	:
+	norminette includes/minirt.h includes/elements.h includes/vectors.h includes/libft.h srcs/libft srcs/libvec srcs/utils srcs/main.c
+
+.PHONY: all clean fclean re nor

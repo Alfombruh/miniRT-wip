@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:06 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/24 06:12:01 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 06:36:57 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	element_plane(char **v, t_rt *rt)
 			plinked_new(rt, temp);
 		}
 		if (get_coord(v[1], &rt->pl->coord) || get_vector(v[2], &rt->pl->n)
-			|| get_trgb(v[3], &rt->pl->tRGB))
+			|| get_trgb(v[3], &rt->pl->trgb))
 			return (1);
 		rt->pl = head;
 	}

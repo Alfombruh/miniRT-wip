@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:00 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/20 23:40:50 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 06:41:17 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ t_vec	place_ray(t_rt *rt, double i, double j)
 
 	a_ratio = (double) WIDTH / (double) HEIGHT;
 	x = (2.0 * ((i + 0.5) / (double) WIDTH) - 1.0)
-		* a_ratio * tan((rt->cam.FOV / 2.0) * (M_PI / 180.0));
+		* a_ratio * tan((rt->cam.fov / 2.0) * (M_PI / 180.0));
 	y = (1.0 - (2.0 * (j + 0.5) / (double) HEIGHT))
-		* tan((rt->cam.FOV / 2.0) * (M_PI / 180.0));
+		* tan((rt->cam.fov / 2.0) * (M_PI / 180.0));
 	return (v_new(-x, y, 1));
 }
 
