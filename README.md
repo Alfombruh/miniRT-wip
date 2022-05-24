@@ -1,7 +1,3 @@
-/////MUST FINISH//////
-
-- norminette
-
 /////MINIRT/////
 
 This a simple raytracer. It simply does raycasting a then traces a ray from the intersection of the original ray with an object to the light source (just one light source).
@@ -26,7 +22,7 @@ cy 20,20,50 0,1,0 10.6 21.2 150,20,70 (cy is the Cylinder element, it has coords
 
 -Q: How many of each element can we use in the .rt?
 
--A: Its been made to have 1 Camera, 1 LightSource, 1 AmbientLight and as many  of the other ones as you want.
+-A: Its been made to have 1 Camera, 1 LightSource, 1 AmbientLight and as many  of the other ones as you want. If you write anothe element of those the last one will be used
 
 
 -Q: What are the coords of the cylinder?

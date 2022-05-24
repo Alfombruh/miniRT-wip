@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:30 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/24 00:11:38 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 04:52:12 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,29 @@
 #include <math.h>
 #include <stdio.h>
 
-static t_vec	object_normal(t_inter inter, t_vec hp)
+static t_vec	object_normal(t_inter inter, t_vec hp, t_vec r)
 {
-
 	if (inter.type == 1)
 		return (v_normalize(v_sub(hp, inter.sph->coord)));
 	else if (inter.type == 2)
+	{	
+		if (v_dot(r, inter.pl->n) / (v_mod(r) * v_mod(inter.pl->n)) > 0)
+			return (v_normalize(v_scal(inter.pl->n, -1)));
 		return (v_normalize(inter.pl->n));
+	}
 	else if (inter.type == 3)
 	{
-		if (v_mod(v_sub(hp, v_add(inter.cy->coord, v_scal(v_normalize(inter.cy->n), inter.cy->h)))) < (inter.cy->d / 2))
+		if (v_mod(v_sub(hp, v_add(inter.cy->coord, v_scal(v_normalize
+							(inter.cy->n), inter.cy->h)))) < (inter.cy->d / 2))
 			return (inter.cy->n);
 		if (v_mod(v_sub(hp, inter.cy->coord)) < (inter.cy->d / 2))
 			return (v_scal(inter.cy->n, -1));
-		return (v_normalize(v_sub(hp, v_add(inter.cy->coord, v_scal(inter.cy->n, v_dot(v_sub(hp, inter.cy->coord), v_normalize(inter.cy->n)))))));
+		return (v_normalize(v_sub(hp, v_add(inter.cy->coord, v_scal(inter.cy->n
+							, v_dot(v_sub(hp, inter.cy->coord),
+								v_normalize(inter.cy->n)))))));
 	}
 	else
-	{
-		//printf("I shouldn't be here\n");
 		return (v_new(0, 0, 0));
-	}
 }
 
 static int	ray_tracing(t_rt *rt, t_vec ray)
@@ -42,25 +45,24 @@ static int	ray_tracing(t_rt *rt, t_vec ray)
 	t_vec	n;
 	t_vec	vl;
 	double	ls;
-	int		diff_color;
-	int		amb_color;
+	int		color[2];
 
 	hp = v_add(v_scal(ray, rt->inter.dist), rt->cam.coord);
-	n = object_normal(rt->inter, hp);
+	n = object_normal(rt->inter, hp, ray);
 	if (n.x == 0 && n.y == 0 && n.z == 0)
 		return (0);
 	vl = v_normalize(v_sub(rt->light.coord, hp));
-	amb_color = amb_light(rt->alight.tRGB, rt->inter.color, rt->alight.ratio);
+	color[0] = amb_light(rt->alight.tRGB, rt->inter.color, rt->alight.ratio);
 	ls = rt->light.ratio * v_dot(n, v_normalize(v_sub(rt->light.coord, hp)));
 	if (ls < 0)
 		ls = 0;
 	else
 		ls *= 1.5;
-	diff_color = color_scal(diff_light(rt->inter.color, rt->light.ratio), ls);
+	color[1] = color_scal(diff_light(rt->inter.color, rt->light.ratio), ls);
 	if (light_intersection(rt, v_add(vl, hp)) == 1)
-		return (color_add(amb_color, diff_color));
+		return (color_add(color[0], color[1]));
 	else
-		return (amb_color);
+		return (color[0]);
 }
 
 int	start_raytrace(t_rt *rt, t_mlx *mlx, t_img *img)

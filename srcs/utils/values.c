@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:39 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/20 23:49:09 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 06:00:21 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_trgb(char *color, int *tRGB)
 	int		i;
 
 	temp = ft_split(color, ',');
-	if (temp[3] || !temp[1] || !temp[2] || !temp[0] || temp[2][0] == '\n')
+	if (!temp[0] || !temp[1] || !temp[2] || temp[3] || temp[2][0] == '\n')
 		return (1);
 	i = -1;
 	while (temp[++i])
@@ -41,7 +41,7 @@ int	get_coord(char *pos, t_vec *vec)
 	char	**temp;
 
 	temp = ft_split(pos, ',');
-	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
+	if (!temp[0] || !temp[1] || !temp[2] || temp[3])
 		return (1);
 	vec->x = ft_atod(temp[0]);
 	vec->y = ft_atod(temp[1]);
@@ -56,13 +56,13 @@ int	get_vector(char *pos, t_vec *vec)
 	char	**temp;
 
 	temp = ft_split(pos, ',');
-	if (temp[3] || !temp[1] || !temp[2] || !temp[0])
+	if (!temp[0] || !temp[1] || !temp[2] || temp[3])
 		return (1);
 	vec->x = ft_atod(temp[0]);
 	vec->y = ft_atod(temp[1]);
 	vec->z = ft_atod(temp[2]);
 	free_double(temp);
 	if (v_mod(v_normalize(*vec)) != 1)
-		return (-1);
+		return (1);
 	return (0);
 }

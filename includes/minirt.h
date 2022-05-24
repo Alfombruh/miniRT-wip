@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:37:56 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/24 00:11:00 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 04:55:38 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_inter
 	t_sph	*sph;
 	int		type;
 	int		color;
-	double		dist;
+	double	dist;
 }			t_inter;
 
 typedef struct s_img
@@ -133,5 +133,11 @@ void	cam_to_origin(t_matrix *cam, t_rt *rt);
 t_vec	place_ray(t_rt *rt, double i, double j);
 t_vec	matrix_vector(t_matrix m, t_vec ray);
 t_vec	ray_transform(t_rt *rt, t_vec ray);
+//norminette//
+int		sphlinked_fill(t_rt *rt, char **v);
+void	sphlinked_new(t_rt *rt, t_sph *temp);
+int		cylinked_fill(t_rt *rt, char **v);
+void	cylinked_new(t_rt *rt, t_cy *temp);
+void	plinked_new(t_rt *rt, t_pl *temp);
 
 #endif

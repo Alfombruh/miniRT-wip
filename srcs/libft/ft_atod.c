@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/20 23:38:40 by jofernan          #+#    #+#             */
+/*   Updated: 2022/05/24 01:22:27 by jofernan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static char *get_int(char *str, double *number, double *neg)
+static char	*get_int(char *str, double *number, double *neg)
 {
 	if (*str == '-' || *str == '+')
 	{
@@ -16,7 +28,7 @@ static char *get_int(char *str, double *number, double *neg)
 	return (str);
 }
 
-double ft_atod(char *str)
+double	ft_atod(char *str)
 {
 	double	number;
 	double	den;

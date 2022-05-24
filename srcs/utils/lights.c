@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:15 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/23 19:29:36 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 01:26:02 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	light_plane(t_rt *rt, t_vec light, double *dist, t_shame sh)
 	return (1);
 }
 
-static int light_cylinder(t_rt *rt, t_vec light, double *dist, t_shame sh)
+static int	light_cylinder(t_rt *rt, t_vec light, double *dist, t_shame sh)
 {
 	t_cy	*temp;
 
@@ -72,7 +72,6 @@ static int light_cylinder(t_rt *rt, t_vec light, double *dist, t_shame sh)
 	rt->cy = temp;
 	return (1);
 }
-
 
 int	light_intersection(t_rt *rt, t_vec light)
 {

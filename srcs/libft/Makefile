@@ -1,7 +1,7 @@
 NAME	= libft.a
 CC		= gcc
 RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror -I. -fsanitize=address -g3
+CFLAGS	= -Wall -Wextra -Werror -I. #-fsanitize=address -g3
 
 FILES	=	ft_isalnum ft_isprint ft_memcmp  ft_putchar_fd ft_split \
 			ft_strlcat ft_strncmp ft_substr ft_atoi ft_isalpha \

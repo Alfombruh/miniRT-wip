@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:13 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/21 00:02:28 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 06:24:49 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	free_pl(t_pl *pl)
 
 	if (!pl)
 		return ;
+	if (!pl->next)
+	{
+		free(pl);
+		return ;
+	}
 	while (pl->next)
 	{
 		temp = pl;

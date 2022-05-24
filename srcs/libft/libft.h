@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 13:00:19 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/06 23:52:29 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 01:23:25 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
-# endif
+
 typedef struct s_list
 {
 	void			*content;

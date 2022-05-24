@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:06 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/21 00:08:14 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 06:12:01 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,15 @@ int	element_sphere(char **v, t_rt *rt)
 		{
 			rt->sph = temp;
 			head = rt->sph;
+			rt->sph->next = NULL;
 		}
 		else
 		{
 			head = rt->sph;
-			while (rt->sph->next)
-				rt->sph = rt->sph->next;
-			rt->sph->next = temp;
-			rt->sph = rt->sph->next;
+			sphlinked_new(rt, temp);
 		}
-		if (get_coord(v[1], &rt->sph->coord))
+		if (sphlinked_fill(rt, v))
 			return (1);
-		rt->sph->d = ft_atod(v[2]);
-		if (get_trgb(v[3], &rt->sph->tRGB))
-			return (1);
-		rt->sph->next = NULL;
 		rt->sph = head;
 	}
 	else
@@ -58,19 +52,16 @@ int	element_plane(char **v, t_rt *rt)
 		{
 			rt->pl = temp;
 			head = rt->pl;
+			rt->pl->next = NULL;
 		}
 		else
 		{
 			head = rt->pl;
-			while (rt->pl->next)
-				rt->pl = rt->pl->next;
-			rt->pl->next = temp;
-			rt->pl = rt->pl->next;
+			plinked_new(rt, temp);
 		}
-		if (get_coord(v[1], &rt->pl->coord) || get_vector(v[2], &rt->pl->n) 
-				|| get_trgb(v[3], &rt->pl->tRGB))
+		if (get_coord(v[1], &rt->pl->coord) || get_vector(v[2], &rt->pl->n)
+			|| get_trgb(v[3], &rt->pl->tRGB))
 			return (1);
-		rt->pl->next = NULL;
 		rt->pl = head;
 	}
 	else
@@ -90,24 +81,15 @@ int	element_cylinder(char **v, t_rt *rt)
 		{
 			rt->cy = temp;
 			head = rt->cy;
+			rt->cy->next = NULL;
 		}
 		else
 		{
 			head = rt->cy;
-			while (rt->cy->next)
-				rt->cy = rt->cy->next;
-			rt->cy->next = temp;
-			rt->cy = rt->cy->next;
+			cylinked_new(rt, temp);
 		}
-		if (get_coord(v[1], &rt->cy->coord))
+		if (cylinked_fill(rt, v))
 			return (1);
-		if (get_vector(v[2], &rt->cy->n))
-			return (1);
-		rt->cy->d = ft_atod(v[3]);
-		rt->cy->h = ft_atod(v[4]);
-		if (get_trgb(v[5], &rt->cy->tRGB))
-			return (1);
-		rt->cy->next = NULL;
 		rt->cy = head;
 	}
 	else

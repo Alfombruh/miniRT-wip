@@ -6,7 +6,7 @@
 /*   By: jofernan <jofernan@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 23:39:28 by jofernan          #+#    #+#             */
-/*   Updated: 2022/05/24 00:16:37 by jofernan         ###   ########.fr       */
+/*   Updated: 2022/05/24 04:52:04 by jofernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ray_sphere(double *dist, double *catched, t_rt *rt, t_vec ray)
 	while (rt->sph)
 	{
 		*dist = sphere_intersection(rt->sph, ray, rt->cam.coord);
-		if (*dist < *catched && *dist > 0)
+		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
 			rt->inter.color = rt->sph->tRGB;
@@ -43,7 +43,7 @@ static void	ray_plane(double *dist, double *catched, t_rt *rt, t_vec ray)
 	while (rt->pl)
 	{
 		*dist = plane_intersection(rt->pl, ray, rt->cam.coord);
-		if (*dist < *catched && *dist > 0)
+		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
 			rt->inter.color = rt->pl->tRGB;
@@ -64,7 +64,7 @@ static void	ray_cylinder(double *dist, double *catched, t_rt *rt, t_vec ray)
 	while (rt->cy)
 	{
 		*dist = cylinder_intersection(rt->cy, ray, rt->cam.coord);
-		if (*dist < *catched && *dist > 0)
+		if (*dist < *catched && *dist > 0 && *dist < 1000)
 		{
 			rt->inter.dist = *dist;
 			rt->inter.color = rt->cy->tRGB;
